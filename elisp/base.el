@@ -47,6 +47,9 @@
       x-select-enable-clipboard          t
       use-package-always-ensure          t)
 
+;; Font
+(set-default-font "Hack 10")
+
 ;; Bookmarks
 (setq
  ;; persistent bookmarks
