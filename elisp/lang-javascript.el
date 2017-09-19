@@ -8,10 +8,13 @@
                ("C-c C-l" . js-load-file-and-go)))
   :mode
   ("\\.js$" . js2-mode)
-  ("\\.json$" . js2-jsx-mode)
   :config
   (custom-set-variables '(js2-strict-inconsistent-return-warning nil))
   (custom-set-variables '(js2-strict-missing-semi-warning nil))
+
+  (use-package json-mode
+    :mode
+      ("\\.json$" . json-mode))
 
   (setq js-indent-level 4)
   (setq js2-indent-level 4)
