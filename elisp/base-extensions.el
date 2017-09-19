@@ -136,9 +136,9 @@
 
 (use-package org-projectile
   :config
-  (org-projectile:per-repo)
-  (setq org-projectile:per-repo-filename "todo.org"
-	org-agenda-files (append org-agenda-files (org-projectile:todo-files))))
+  (org-projectile-per-project)
+  (setq org-projectile-projects-file "todo.org"
+	org-agenda-files (append org-agenda-files (org-projectile-todo-files))))
 
 (use-package org-bullets
   :config
