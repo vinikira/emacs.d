@@ -1,4 +1,3 @@
-
 (use-package ace-window
   :init
   (progn
@@ -161,6 +160,8 @@
   (setq projectile-completion-system 'ivy)
 
   (projectile-global-mode))
+
+(use-package try)
 
 (use-package recentf
   :config
