@@ -4,6 +4,7 @@
          ("C-c o b" . browse-url-of-file))
   :mode
   (("\\.html?\\'" . web-mode)
+   ("\\.njk?\\'" . web-mode)
    ("\\.phtml?\\'" . web-mode)
    ("\\.tpl\\.php\\'" . web-mode)
    ("\\.[agj]sp\\'" . web-mode)
