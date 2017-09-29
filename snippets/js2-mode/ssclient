@@ -2,7 +2,7 @@
 #name : SuiteScript Client
 # --
 /**
- * @NApiVersion 2.x 
+ * @NApiVersion 2.x
  * @NScriptType ClientScript
  */
 define([${1:deps}],
