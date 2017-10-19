@@ -135,9 +135,9 @@
 
 (use-package page-break-lines)
 
-(use-package powerline
-  :init
-  (powerline-default-theme))
+;; (use-package powerline
+;;   :init
+;;   (powerline-default-theme))
 
 (use-package projectile
   :config
