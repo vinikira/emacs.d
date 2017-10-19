@@ -12,7 +12,10 @@
   ("\\.jsx$" . js2-jsx-mode)
   :config
   (custom-set-variables '(js2-strict-inconsistent-return-warning nil))
-  (custom-set-variables '(js2-strict-missing-semi-warning nil)))
+  (custom-set-variables '(js2-strict-missing-semi-warning nil))
+  (setq js2-global-externs '("define" "require" "app"))
+  (setq js2-include-node-externs t)
+  (setq js2-pretty-multiline-declarations nil))
 
 (use-package json-mode
   :mode
