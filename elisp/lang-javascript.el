@@ -58,10 +58,16 @@
 
 ;; prettier-js - format javascript source codes
 ;; https://github.com/prettier/prettier-emacs
-(use-package prettier-js
-  :diminish
+;; (use-package prettier-js
+;;   :diminish
+;;   :config
+;;   (add-hook 'js2-mode-hook 'prettier-js-mode)
+;;   (setq prettier-js-args '("--tab-width" "4")))
+
+;; eslintd fix support
+;; https://github.com/aaronjensen/eslintd-fix
+(use-package eslintd-fix
   :config
-  (add-hook 'js2-mode-hook 'prettier-js-mode)
-  (setq prettier-js-args '("--tab-width" "4")))
+  (add-hook 'js2-mode-hook 'eslintd-fix-mode))
 
 (provide 'lang-javascript)
