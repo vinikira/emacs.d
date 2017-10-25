@@ -1,7 +1,6 @@
 ;; js2-mode
 ;; https://github.com/mooz/js2-mode
 (use-package js2-mode
-  :diminish Javascript-IDE "JS"
   :bind (:map js2-mode-map
               (("C-x C-e" . js-send-last-sexp)
                ("C-M-x" . js-send-last-sexp-and-go)
@@ -15,7 +14,8 @@
   (custom-set-variables '(js2-strict-missing-semi-warning nil))
   (setq js2-global-externs '("define" "require" "app"))
   (setq js2-include-node-externs t)
-  (setq js2-pretty-multiline-declarations nil))
+  (setq js2-pretty-multiline-declarations nil)
+  (setq-default indent-tabs-mode nil))
 
 (use-package json-mode
   :mode
@@ -51,7 +51,6 @@
 ;; js2-refactor :- refactoring options for emacs
 ;; https://github.com/magnars/js2-refactor.el
 (use-package js2-refactor :defer t
-  :diminish js2-refactor-mode "JSR"
   :config
   (js2r-add-keybindings-with-prefix "C-c j r")
   (add-hook 'js2-mode-hook 'js2-refactor-mode))
