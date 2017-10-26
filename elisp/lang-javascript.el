@@ -50,10 +50,11 @@
 
 ;; js2-refactor :- refactoring options for emacs
 ;; https://github.com/magnars/js2-refactor.el
-(use-package js2-refactor :defer t
+(use-package js2-refactor
+  :defer t
   :config
   (js2r-add-keybindings-with-prefix "C-c j r")
-  (add-hook 'js2-mode-hook 'js2-refactor-mode))
+  (add-hook 'js2-mode-hook #'js2-refactor-mode))
 
 ;; prettier-js - format javascript source codes
 ;; https://github.com/prettier/prettier-emacs

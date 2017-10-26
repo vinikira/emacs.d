@@ -48,6 +48,7 @@
   ("C-=" . er/expand-region))
 
 (use-package flycheck
+  :diminish ""
   :config
   ;; (defun my/use-eslint-from-node-modules ()
   ;; (let* ((root (locate-dominating-file
@@ -59,6 +60,7 @@
   ;;   (when (and eslint (file-executable-p eslint))
   ;;     (setq-local flycheck-javascript-eslint-executable eslint))))
   ;; (add-hook 'flycheck-mode-hook #'my/use-eslint-from-node-modules)
+  (flycheck-mode)
   (setq flycheck-javascript-eslint-executable "eslint_d"))
 
 (use-package counsel
@@ -118,7 +120,7 @@
 
 (use-package org
   :config
-  (setq org-directory "~/org-files"
+  (setq org-directory "~/Dropbox/org-files"
         org-default-notes-file (concat org-directory "/todo.org"))
   :bind
   ("C-c l" . org-store-link)
