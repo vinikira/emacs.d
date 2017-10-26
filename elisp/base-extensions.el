@@ -19,7 +19,10 @@
 
 (use-package dashboard
   :config
-  (dashboard-setup-startup-hook))
+  (dashboard-setup-startup-hook)
+  (setq dashboard-items '((recents  . 5)
+                        (projects . 5)
+                        (agenda . 5))))
 
 (use-package ediff
   :config
