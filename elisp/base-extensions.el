@@ -170,6 +170,10 @@
 
 (use-package try)
 
+(use-package twittering-mode
+  :config
+  (setq twittering-icon-mode t))
+
 (use-package recentf
   :config
   (setq recentf-save-file (recentf-expand-file-name "~/.emacs.d/private/cache/recentf"))

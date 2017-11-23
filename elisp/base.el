@@ -48,7 +48,7 @@
       use-package-always-ensure          t)
 
 ;; Font
-(set-default-font "Hack 10")
+(set-default-font "Hack 11")
 
 ;; Bookmarks
 (setq
