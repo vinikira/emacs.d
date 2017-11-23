@@ -172,7 +172,8 @@
 
 (use-package twittering-mode
   :config
-  (setq twittering-icon-mode t))
+  (setq twittering-icon-mode t
+	twittering-use-master-password t))
 
 (use-package recentf
   :config
