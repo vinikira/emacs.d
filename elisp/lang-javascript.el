@@ -69,8 +69,8 @@
 
 ;; eslintd fix support
 ;; https://github.com/aaronjensen/eslintd-fix
-(use-package eslintd-fix
-  :config
-  (add-hook 'js2-mode-hook 'eslintd-fix-mode))
+;; (use-package eslintd-fix
+;;   :config
+;;   (add-hook 'js2-mode-hook 'eslintd-fix-mode))
 
 (provide 'lang-javascript)
