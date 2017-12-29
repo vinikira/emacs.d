@@ -34,13 +34,17 @@
     "Hook for `js-mode'."
     (set (make-local-variable 'company-backends)
 	 '((company-tern company-files))))
+  (define-key tern-mode-keymap (kbd "M-.") nil)
+  (define-key tern-mode-keymap (kbd "M-,") nil)
   (add-hook 'js2-mode-hook 'my-js-mode-hook)
   (add-hook 'js2-mode-hook 'company-mode)
   (add-hook 'js2-mode-hook 'tern-mode))
 
 ;; company backend for tern
 ;; http://ternjs.net/doc/manual.html#emacs
-(use-package company-tern)
+(use-package company-tern
+  :config
+  (setq company-tooltip-align-annotations t))
 
 ;; Run a JavaScript interpreter in an inferior process window
 ;; https://github.com/redguardtoo/js-comint
@@ -51,10 +55,9 @@
 ;; js2-refactor :- refactoring options for emacs
 ;; https://github.com/magnars/js2-refactor.el
 (use-package js2-refactor
-  :defer t
   :config
   (js2r-add-keybindings-with-prefix "C-c j r")
-  (add-hook 'js2-mode-hook #'js2-refactor-mode))
+  (add-hook 'js2-mode-hook 'js2-refactor-mode))
 
 ;; prettier-js - format javascript source codes
 ;; https://github.com/prettier/prettier-emacs
