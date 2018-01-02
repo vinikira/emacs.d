@@ -33,7 +33,7 @@
   (defun my-js-mode-hook ()
     "Hook for `js-mode'."
     (set (make-local-variable 'company-backends)
-	 '((company-tern company-files))))
+	 '((company-tern company-files company-yasnippet))))
   (define-key tern-mode-keymap (kbd "M-.") nil)
   (define-key tern-mode-keymap (kbd "M-,") nil)
   (add-hook 'js2-mode-hook 'my-js-mode-hook)
@@ -59,18 +59,12 @@
   (js2r-add-keybindings-with-prefix "C-c j r")
   (add-hook 'js2-mode-hook 'js2-refactor-mode))
 
-;; prettier-js - format javascript source codes
-;; https://github.com/prettier/prettier-emacs
+;;prettier-js - format javascript source codes
+;;https://github.com/prettier/prettier-emacs
 ;; (use-package prettier-js
-;;   :diminish
 ;;   :config
 ;;   (add-hook 'js2-mode-hook 'prettier-js-mode)
-;;   (setq prettier-js-args '("--tab-width" "4")))
-
-;; eslintd fix support
-;; https://github.com/aaronjensen/eslintd-fix
-;; (use-package eslintd-fix
-;;   :config
-;;   (add-hook 'js2-mode-hook 'eslintd-fix-mode))
+;;   ;;eslint support
+;;   (add-hook 'js2-mode-hook (lambda () (add-hook 'after-save-hook #'eslint-fix-file t))))
 
 (provide 'lang-javascript)
