@@ -1,4 +1,0 @@
-# -*- mode: snippet -*-
-#name : Arrow Function
-# --
-(${1:params}) => { $0 }

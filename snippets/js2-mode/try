@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-#name : Try catch
-# --
-try {
-  $0
-} catch (e) {
-  console.log(e.message)
-}
