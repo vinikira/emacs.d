@@ -48,7 +48,7 @@
       use-package-always-ensure          t)
 
 ;; Font
-(set-default-font "Hack 11")
+(set-default-font "Input Mono 11")
 
 ;; Bookmarks
 (setq
@@ -76,13 +76,16 @@
 (menu-bar-mode -1)
 (when (fboundp 'tool-bar-mode)
   (tool-bar-mode -1))
-(when (  fboundp 'scroll-bar-mode)
+(when (fboundp 'scroll-bar-mode)
   (scroll-bar-mode -1))
 
 (show-paren-mode 1)
 
 ;; Delete trailing whitespace before save
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
+
+;; Start Emacs server to receive emacsclient request
+(server-start)
 
 (provide 'base)
 ;;; base ends here
