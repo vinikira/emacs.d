@@ -67,4 +67,8 @@
 ;;   ;;eslint support
 ;;   (add-hook 'js2-mode-hook (lambda () (add-hook 'after-save-hook #'eslint-fix-file t))))
 
-(provide 'lang-javascript)
+(use-package vue-mode
+  :mode
+  ("\\.vue$" . vue-mode))
+
+(Provide 'lang-javascript)

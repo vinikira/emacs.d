@@ -48,7 +48,6 @@
   ("C-=" . er/expand-region))
 
 (use-package flycheck
-  :diminish ""
   :config
   (defun my/use-eslint-from-node-modules ()
   (let* ((root (locate-dominating-file
@@ -178,6 +177,13 @@
   :config
   (setq recentf-save-file (recentf-expand-file-name "~/.emacs.d/private/cache/recentf"))
   (recentf-mode 1))
+
+(use-package restclient
+  :mode
+  ("\\.http$" . restclient-mode)
+  ("\\.https$" . restclient-mode))
+
+(use-package restclient-test)
 
 (use-package smartparens)
 
