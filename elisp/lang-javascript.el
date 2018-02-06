@@ -71,4 +71,4 @@
   :mode
   ("\\.vue$" . vue-mode))
 
-(Provide 'lang-javascript)
+(provide 'lang-javascript)
