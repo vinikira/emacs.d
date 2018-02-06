@@ -24,6 +24,8 @@
                         (projects . 5)
                         (agenda . 5))))
 
+(use-package diminish)
+
 (use-package ediff
   :config
   (setq ediff-window-setup-function 'ediff-setup-windows-plain)
