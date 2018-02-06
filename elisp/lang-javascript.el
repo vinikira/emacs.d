@@ -8,7 +8,6 @@
                ("C-c C-l" . js-load-file-and-go)))
   :mode
   ("\\.js$" . js2-mode)
-  ("\\.jsx$" . js2-jsx-mode)
   :config
   (custom-set-variables '(js2-strict-inconsistent-return-warning nil))
   (custom-set-variables '(js2-strict-missing-semi-warning nil))
@@ -66,6 +65,11 @@
 ;;   (add-hook 'js2-mode-hook 'prettier-js-mode)
 ;;   ;;eslint support
 ;;   (add-hook 'js2-mode-hook (lambda () (add-hook 'after-save-hook #'eslint-fix-file t))))
+
+
+(use-package rjsx-mode
+  :mode
+  ("\\.jsx$" . js2-jsx-mode))
 
 (use-package vue-mode
   :mode
