@@ -84,7 +84,6 @@
   (setq ivy-use-virtual-buffers nil)
   (define-key read-expression-map (kbd "C-r") 'counsel-expression-history))
 
-
 (use-package hlinum
   :config
   (hlinum-activate))
@@ -150,12 +149,12 @@
 
   (setq projectile-completion-system 'ivy)
 
-  (projectile-global-mode))
+  (projectile-mode))
 
 (use-package treemacs
   :config
   (progn
-    (setq treemacs-git-integration    t))
+    (setq treemacs-git-mode t))
   :bind
   (:map global-map
         ([f8]        . treemacs-toggle)
