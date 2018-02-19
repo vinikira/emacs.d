@@ -1,3 +1,6 @@
+;;; base.el --- base settings
+;;; Commentary:
+;;; Code:
 (package-initialize)
 (add-to-list 'package-archives
 	     '("melpa" . "https://melpa.org/packages/")

@@ -1,3 +1,7 @@
+;;; lang-javascript.el --- Javascript lang
+;;; Commentary:
+;;; Code:
+
 ;; js2-mode
 ;; https://github.com/mooz/js2-mode
 (use-package js2-mode
@@ -76,3 +80,4 @@
   ("\\.vue$" . vue-mode))
 
 (provide 'lang-javascript)
+;;; lang-javascript ends here

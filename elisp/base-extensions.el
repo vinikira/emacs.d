@@ -1,3 +1,7 @@
+;;; base-extensions.el --- Base extensions
+;;; Commentary:
+;;; Code:
+
 (use-package ace-window
   :init
   (progn
@@ -219,3 +223,4 @@
 (use-package yasnippet-snippets)
 
 (provide 'base-extensions)
+;;; base-extensions ends here

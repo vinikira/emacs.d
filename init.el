@@ -19,8 +19,12 @@
 (require 'base-functions)
 (require 'base-global-keys)
 
-;; (require 'lang-python)
+(require 'lang-python)
 
 (require 'lang-javascript)
 
 (require 'lang-web)
+
+(require 'lang-lisp)
+
+;;; init.el ends here
