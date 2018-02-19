@@ -1,0 +1,7 @@
+* My emacs settings
+  Based on [[Emacs Bootstrap][[[http://emacs-bootstrap.com/]]]].
+** Programming Language Support
+*** JavaScript
+*** Web (html + css)
+*** Lisp
+*** Python
