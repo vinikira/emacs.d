@@ -1,7 +1,9 @@
-;; Add your custom functions here
-
-;; (defun something
-;;    (do-something))
+;;; base-functions --- Custom functions
+;;; Commentary:
+;;; Add your custom functions here
+;;; (defun something
+;;;    (do-something))
+;;; Code:
 
 (defun split-window-below-and-switch ()
   "Split the window horizontally, then switch to the new pane."
@@ -38,3 +40,4 @@
 (revert-buffer t t t)))
 
 (provide 'base-functions)
+;;; base-functions ends here

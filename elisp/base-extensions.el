@@ -1,3 +1,7 @@
+;;; base-extensions.el --- Base extensions
+;;; Commentary:
+;;; Code:
+
 (use-package ace-window
   :init
   (progn
@@ -86,7 +90,6 @@
   (setq ivy-use-virtual-buffers nil)
   (define-key read-expression-map (kbd "C-r") 'counsel-expression-history))
 
-
 (use-package hlinum
   :config
   (hlinum-activate))
@@ -152,12 +155,12 @@
 
   (setq projectile-completion-system 'ivy)
 
-  (projectile-global-mode))
+  (projectile-mode))
 
 (use-package treemacs
   :config
   (progn
-    (setq treemacs-git-integration    t))
+    (setq treemacs-git-mode t))
   :bind
   (:map global-map
         ([f8]        . treemacs-toggle)
@@ -222,3 +225,4 @@
 (use-package yasnippet-snippets)
 
 (provide 'base-extensions)
+;;; base-extensions ends here

@@ -1,3 +1,6 @@
+;;; base.el --- base settings
+;;; Commentary:
+;;; Code:
 (package-initialize)
 (add-to-list 'package-archives
 	     '("melpa" . "https://melpa.org/packages/")
@@ -44,11 +47,11 @@
       indent-tabs-mode                   nil
       inhibit-startup-message            t
       fringes-outside-margins            t
-      x-select-enable-clipboard          t
+      select-enable-clipboard            t
       use-package-always-ensure          t)
 
 ;; Font
-(set-default-font "Input Mono 11")
+(set-frame-font "Input Mono 11")
 
 ;; Bookmarks
 (setq

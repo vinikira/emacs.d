@@ -1,7 +1,6 @@
-;;; package --- python configs
+;;; package --- Python Lang
 ;;; Commentary:
 ;;; Contains my python configs
-
 ;;; Code:
 
 (use-package python
@@ -59,4 +58,4 @@
 (add-hook 'projectile-after-switch-project-hook 'pyenv-activate-current-project)
 
 (provide 'lang-python)
-;;; base-python.el ends here
+;;; lang-python.el ends here

@@ -1,3 +1,7 @@
+;;; lang-web --- Lang Web
+;;; Commentary:
+;;; Code:
+
 (use-package web-mode
   :bind (("C-c ]" . emmet-next-edit-point)
          ("C-c [" . emmet-prev-edit-point)
@@ -38,7 +42,8 @@
   ;; editing enhancements for web-mode
   ;; https://github.com/jtkDvlp/web-mode-edit-element
   (use-package web-mode-edit-element
-    :config (add-hook 'web-mode-hook 'web-mode-edit-element-minor-mode))
+    ;; :config (add-hook 'web-mode-hook 'web-mode-edit-element-minor-mode)
+    )
 
   ;; snippets for HTML
   ;; https://github.com/smihica/emmet-mode
@@ -46,6 +51,7 @@
     :init (setq emmet-move-cursor-between-quotes t) ;; default nil
     :diminish (emmet-mode . " e"))
   (add-hook 'web-mode-hook 'emmet-mode)
+  (add-hook 'vue-mode-hook 'emmet-mode)
 
   (defun my-web-mode-hook ()
     "Hook for `web-mode' config for company-backends."
@@ -93,3 +99,4 @@
   :commands (impatient-mode))
 
 (provide 'lang-web)
+;;; lang-web ends here

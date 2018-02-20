@@ -1,12 +1,7 @@
-;; (use-package spacemacs-theme
-;;   :defer t
-;;   :init
-;;   (load-theme 'spacemacs-dark t))
+;;; base-theme --- Custom themes
+;;; Commentary:
+;;; Code:
 
-;; (use-package monokai-theme
-;;   :defer t
-;;   :init
-;;   (load-theme 'monokai t))
 
 ;; Zero dark theme
 ;; https://github.com/NicolasPetton/zerodark-theme
@@ -16,4 +11,17 @@
   (load-theme 'zerodark t)
   (zerodark-setup-modeline-format))
 
+(use-package spacemacs-theme
+  :defer t
+  ;; :init
+  ;; (load-theme 'spacemacs-dark t)
+  )
+
+(use-package monokai-theme
+  :defer t
+  ;; :init
+  ;; (load-theme 'monokai t)
+  )
+
 (provide 'base-theme)
+;;; base-theme ends here
