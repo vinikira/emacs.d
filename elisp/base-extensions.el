@@ -36,11 +36,6 @@
   (setq-default ediff-highlight-all-diffs 'nil)
   (setq ediff-diff-options "-w"))
 
-(use-package electric
-  :init
-  (progn
-    (electric-pair-mode 1)))
-
 (use-package exec-path-from-shell
   :config
   ;; Add GOPATH to shell
@@ -190,7 +185,8 @@
 
 (use-package restclient-test)
 
-(use-package smartparens)
+(use-package smartparens
+  :config (smartparens-global-mode))
 
 (use-package smex)
 
