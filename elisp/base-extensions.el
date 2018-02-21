@@ -120,7 +120,8 @@
 (use-package org
   :config
   (setq org-directory "~/Dropbox/org-files"
-        org-default-notes-file (concat org-directory "/todo.org"))
+        org-default-notes-file (concat org-directory "/todo.org")
+        org-agenda-files '("~/Dropbox/org-files"))
   :bind
   ("C-c l" . org-store-link)
   ("C-c a" . org-agenda))
