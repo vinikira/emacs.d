@@ -51,7 +51,7 @@
       use-package-always-ensure          t)
 
 ;; Font
-(set-frame-font "Input Mono 11")
+(set-frame-font "Input Mono 9")
 
 ;; Bookmarks
 (setq
