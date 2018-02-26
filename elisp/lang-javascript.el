@@ -31,6 +31,7 @@
 ;; tern :- IDE like features for javascript and completion
 ;; http://ternjs.net/doc/manual.html#emacs
 (use-package tern
+  :defer t
   :diminish tern-mode "Tern"
   :config
   (defun my-js-mode-hook ()
@@ -72,6 +73,7 @@
 
 
 (use-package rjsx-mode
+  :ensure t
   :mode
   ("\\.jsx$" . js2-jsx-mode))
 

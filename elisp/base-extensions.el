@@ -49,6 +49,7 @@
   ("C-=" . er/expand-region))
 
 (use-package flycheck
+  :defer t
   :config
   ;; (defun my/use-eslint-from-node-modules ()
   ;; (let* ((root (locate-dominating-file
