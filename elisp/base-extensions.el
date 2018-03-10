@@ -36,6 +36,11 @@
   (setq-default ediff-highlight-all-diffs 'nil)
   (setq ediff-diff-options "-w"))
 
+(use-package editorconfig
+  :ensure t
+  :config
+  (editorconfig-mode 1))
+
 (use-package exec-path-from-shell
   :config
   ;; Add GOPATH to shell
