@@ -5,6 +5,7 @@
 (add-to-list 'package-archives
 	     '("melpa" . "https://melpa.org/packages/")
              '("elpy" . "http://jorgenschaefer.github.io/packages/"))
+(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
 
 (when (not package-archive-contents)
   (package-refresh-contents))
@@ -51,7 +52,7 @@
       use-package-always-ensure          t)
 
 ;; Font
-(set-frame-font "Input Mono 9")
+(set-frame-font "Fira Mono:style=Regular:pixelsize=14:antialias=yes")
 
 ;; Bookmarks
 (setq

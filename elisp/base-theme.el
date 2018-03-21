@@ -2,6 +2,12 @@
 ;;; Commentary:
 ;;; Code:
 
+(use-package material-theme
+  :ensure t
+  :defer t
+  ;; :init
+  ;; (load-theme 'material t)
+  )
 
 ;; Zero dark theme
 ;; https://github.com/NicolasPetton/zerodark-theme
