@@ -21,6 +21,10 @@
   (setq company-dabbrev-downcase 0)
   (setq company-idle-delay 0))
 
+(use-package company-quick-help
+    :config
+  (add-hook 'after-init-hook 'company-quickhelp-mode))
+
 (use-package dashboard
   :config
   (dashboard-setup-startup-hook)
