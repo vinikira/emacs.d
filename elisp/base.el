@@ -51,6 +51,7 @@
       select-enable-clipboard            t
       use-package-always-ensure          t)
 
+
 ;; Font
 (set-frame-font "Fira Mono:style=Regular:pixelsize=14:antialias=yes")
 

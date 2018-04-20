@@ -47,6 +47,8 @@
 ;; company backend for tern
 ;; http://ternjs.net/doc/manual.html#emacs
 (use-package company-tern
+  :after tern
+  :if (executable-find "tern")
   :config
   (setq company-tooltip-align-annotations t))
 
@@ -80,6 +82,14 @@
 (use-package vue-mode
   :mode
   ("\\.vue$" . vue-mode))
+
+;; indium: javascript awesome development environment
+;; https://github.com/NicolasPetton/indium
+(use-package indium
+  :after js2-mode
+  :bind (:map js2-mode-map
+              ("C-c C-l" . indium-eval-buffer))
+  :hook ((js2-mode . indium-interaction-mode)))
 
 (provide 'lang-javascript)
 ;;; lang-javascript ends here

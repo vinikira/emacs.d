@@ -120,6 +120,9 @@
 
 (use-package magit-popup)
 
+(use-package markdown-mode
+  :mode ("\\.\\(m\\(ark\\)?down\\|md\\)$" . markdown-mode))
+
 (use-package multiple-cursors
   :bind
   ("C-S-c C-S-c" . mc/edit-lines)

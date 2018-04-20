@@ -98,5 +98,10 @@
   :diminish (impatient-mode . " i")
   :commands (impatient-mode))
 
+;; Pug mode
+;; https://github.com/hlissner/emacs-pug-mode
+(use-package pug-mode
+  :mode ("\\.pug?\\'" . pug-mode))
+
 (provide 'lang-web)
 ;;; lang-web ends here
