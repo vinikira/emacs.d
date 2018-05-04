@@ -179,6 +179,7 @@
         ("C-c 1"     . treemacs-delete-other-windows)))
 
 (use-package treemacs-projectile
+  :after treemacs
   :config
   (setq treemacs-header-function #'treemacs-projectile-create-header))
 
