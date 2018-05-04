@@ -15,7 +15,7 @@
 
 (defconst private-dir  (expand-file-name "private" user-emacs-directory))
 (defconst temp-dir (format "%s/cache" private-dir)
-  "Hostname-based elisp temp directories")
+  "Hostname-based elisp temp directories.")
 
 ;; Core settings
 ;; UTF-8 please
@@ -71,11 +71,13 @@
  make-backup-files                  t
  create-lockfiles                   nil
  backup-directory-alist            `((".*" . ,(concat temp-dir "/backup/")))
- ;; auto-save-file-name-transforms    `((".*" ,(concat temp-dir "/auto-save-list/") t))
+ auto-save-file-name-transforms    `((".*" ,(concat temp-dir "/backup/") t))
  )
 
 (fset 'yes-or-no-p 'y-or-n-p)
 (global-auto-revert-mode t)
+
+(diminish 'auto-revert-mode)
 
 ;; Disable toolbar & menubar
 (menu-bar-mode -1)

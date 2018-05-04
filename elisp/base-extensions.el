@@ -16,6 +16,7 @@
   ("C-c SPC" . avy-goto-char))
 
 (use-package company
+  :diminish 'company-mode
   :config
   (add-hook 'after-init-hook 'global-company-mode)
   (setq company-dabbrev-downcase 0)
@@ -32,6 +33,8 @@
                         (projects . 5)
                         (agenda . 5))))
 
+(use-package delight)
+
 (use-package diminish)
 
 (use-package ediff
@@ -41,7 +44,7 @@
   (setq ediff-diff-options "-w"))
 
 (use-package editorconfig
-  :ensure t
+  :diminish 'editorconfig-mode
   :config
   (editorconfig-mode 1))
 
@@ -88,6 +91,7 @@
   (counsel-projectile-on))
 
 (use-package ivy
+  :diminish 'ivy-mode
   :bind
   ("C-x s" . swiper)
   ("C-x C-r" . ivy-resume)
@@ -160,6 +164,7 @@
 ;;   (powerline-default-theme))
 
 (use-package projectile
+  :delight '(:eval (concat " [" (projectile-project-name) "]"))
   :config
   (setq projectile-known-projects-file
         (expand-file-name "projectile-bookmarks.eld" temp-dir))
@@ -203,11 +208,13 @@
 (use-package restclient-test)
 
 (use-package smartparens
+  :delight
   :config (smartparens-global-mode))
 
 (use-package smex)
 
 (use-package undo-tree
+  :diminish 'undo-tree-mode
   :config
   ;; Remember undo history
   (setq
@@ -216,6 +223,7 @@
   (global-undo-tree-mode 1))
 
 (use-package which-key
+  :diminish 'which-key-mode
   :config
   (which-key-mode))
 
@@ -229,6 +237,7 @@
 (use-package wgrep)
 
 (use-package yasnippet
+  :diminish 'yas-minor-mode
   :init (setq yas-snippet-dirs
               '("~/.emacs.d/snippets/"
                 yas-installed-snippets-dir))

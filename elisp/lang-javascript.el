@@ -5,6 +5,7 @@
 ;; js2-mode
 ;; https://github.com/mooz/js2-mode
 (use-package js2-mode
+  :delight "EcmaScript"
   :bind (:map js2-mode-map
               (("C-x C-e" . js-send-last-sexp)
                ("C-M-x" . js-send-last-sexp-and-go)
@@ -32,7 +33,7 @@
 ;; http://ternjs.net/doc/manual.html#emacs
 (use-package tern
   :defer t
-  :diminish tern-mode "Tern"
+  :delight
   :config
   (defun my-js-mode-hook ()
     "Hook for `js-mode'."
@@ -89,7 +90,9 @@
   :after js2-mode
   :bind (:map js2-mode-map
               ("C-c C-l" . indium-eval-buffer))
-  :hook ((js2-mode . indium-interaction-mode)))
+  :hook ((js2-mode . indium-interaction-mode))
+  :config (diminish 'indium-interaction-mode))
+
 
 (provide 'lang-javascript)
 ;;; lang-javascript ends here
