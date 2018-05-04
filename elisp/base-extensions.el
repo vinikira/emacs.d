@@ -174,7 +174,7 @@
     (setq treemacs-git-mode t))
   :bind
   (:map global-map
-        ([f8]        . treemacs-toggle)
+        ([f8]        . treemacs)
         ("M-0"       . treemacs-select-window)
         ("C-c 1"     . treemacs-delete-other-windows)))
 
