@@ -139,12 +139,26 @@
   (setq org-directory "~/Dropbox/org-files"
         org-default-notes-file (concat org-directory "/todo.org")
         org-agenda-files '("~/Dropbox/org-files")
-        org-src-fontify-natively t)
+        org-src-fontify-natively t
+        org-log-done 'time
+        org-capture-templates
+        '(("t" "todo" entry (file org-default-notes-file)
+           "* TODO %?\n%u\n%a\n" :clock-in t :clock-resume t)
+          ("m" "Meeting" entry (file org-default-notes-file)
+           "* MEETING with %? :MEETING:\n%t" :clock-in t :clock-resume t)
+          ("d" "Diary" entry (file+datetree "~/org/diary.org")
+           "* %?\n%U\n" :clock-in t :clock-resume t)
+          ("i" "Idea" entry (file org-default-notes-file)
+           "* %? :IDEA: \n%t" :clock-in t :clock-resume t)
+          ("n" "Next Task" entry (file+headline org-default-notes-file "Tasks")
+           "** NEXT %? \nDEADLINE: %t") ))
   :bind
   ("C-c l" . org-store-link)
   ("C-c a" . org-agenda))
 
 (use-package org-projectile
+  :bind (("C-c n p" . org-projectile-project-todo-completing-read)
+         ("C-c c" . org-capture))
   :config
   (org-projectile-per-project)
   (setq org-projectile-projects-file "todo.org"
