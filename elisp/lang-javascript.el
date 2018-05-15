@@ -93,6 +93,29 @@
   :hook ((js2-mode . indium-interaction-mode))
   :config (diminish 'indium-interaction-mode))
 
+;; typescript mode
+;; https://github.com/ananthakumaran/tide
+(defun setup-tide-mode ()
+  "Setup typscript mode."
+  (interactive)
+  (tide-setup)
+  (flycheck-mode +1)
+  (setq flycheck-check-syntax-automatically '(save mode-enabled))
+  (eldoc-mode +1)
+  (tide-hl-identifier-mode +1)
+  ;; company is an optional dependency. You have to
+  ;; install it separately via package-install
+  ;; `M-x package-install [ret] company`
+  (company-mode +1))
+
+(use-package tide
+  :mode(("\\.ts\\'" . typescript-mode))
+  :config
+  (setup-tide-mode)
+  (setq company-tooltip-align-annotations t)
+  ;; formats the buffer before saving
+  (add-hook 'before-save-hook 'tide-format-before-save)
+  (add-hook 'typescript-mode-hook #'setup-tide-mode))
 
 (provide 'lang-javascript)
 ;;; lang-javascript ends here
