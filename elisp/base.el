@@ -78,6 +78,7 @@
 (global-auto-revert-mode t)
 
 (diminish 'auto-revert-mode)
+(diminish 'page-break-lines-mode)
 
 ;; Disable toolbar & menubar
 (menu-bar-mode -1)

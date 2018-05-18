@@ -62,6 +62,7 @@
 
 (use-package flycheck
   :defer t
+  :diminish
   :config
   ;; (defun my/use-eslint-from-node-modules ()
   ;; (let* ((root (locate-dominating-file
