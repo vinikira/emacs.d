@@ -18,14 +18,10 @@
 (require 'base-extensions)
 (require 'base-functions)
 (require 'base-global-keys)
-
 (require 'lang-python)
-
 (require 'lang-javascript)
-
 (require 'lang-web)
-
 (require 'lang-lisp)
-
 (require 'lang-elixir)
+(require 'lang-clojure)
 ;;; init.el ends here
