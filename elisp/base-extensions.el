@@ -251,6 +251,9 @@
 
 (use-package wgrep)
 
+(use-package xclip
+  :config (xclip-mode))
+
 (use-package yasnippet
   :diminish 'yas-minor-mode
   :init (setq yas-snippet-dirs
