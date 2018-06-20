@@ -111,7 +111,7 @@
   (company-mode +1))
 
 (use-package tide
-  :mode(("\\.ts\\'" . typescript-mode))
+  :mode (("\\.ts\\'" . typescript-mode))
   :config
   (setup-tide-mode)
   (setq company-tooltip-align-annotations t)
