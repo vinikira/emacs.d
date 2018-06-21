@@ -257,8 +257,7 @@
 (use-package yasnippet
   :diminish 'yas-minor-mode
   :init (setq yas-snippet-dirs
-              '("~/.emacs.d/snippets/"
-                yas-installed-snippets-dir))
+              '("~/.emacs.d/snippets/"))
   :config
   (yas-global-mode 1))
 
