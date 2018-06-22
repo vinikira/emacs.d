@@ -15,4 +15,5 @@
 (use-package flycheck-plantuml
   :config (flycheck-plantuml-setup))
 
+(provide 'lang-plantuml)
 ;;; lang-plantuml ends here
