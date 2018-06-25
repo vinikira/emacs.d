@@ -25,9 +25,9 @@
   :mode
   ("\\.json$" . json-mode))
 
-(setq js-indent-level 4)
-(setq js2-indent-level 4)
-(setq js2-basic-offset 4)
+(setq js-indent-level 2)
+(setq js2-indent-level 2)
+(setq js2-basic-offset 2)
 
 ;; tern :- IDE like features for javascript and completion
 ;; http://ternjs.net/doc/manual.html#emacs
