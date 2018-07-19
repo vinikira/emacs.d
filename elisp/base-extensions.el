@@ -174,9 +174,9 @@
 
 (use-package page-break-lines)
 
-;; (use-package powerline
-;;   :init
-;;   (powerline-default-theme))
+(use-package powerline
+  :init
+  (powerline-center-theme))
 
 (use-package projectile
   :delight '(:eval (concat " [" (projectile-project-name) "]"))
@@ -251,8 +251,8 @@
 
 (use-package wgrep)
 
-(use-package xclip
-  :config (xclip-mode))
+;; (use-package xclip
+;;   :config (xclip-mode))
 
 (use-package yasnippet
   :diminish 'yas-minor-mode

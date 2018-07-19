@@ -49,7 +49,8 @@
       inhibit-startup-message            t
       fringes-outside-margins            t
       select-enable-clipboard            t
-      use-package-always-ensure          t)
+      use-package-always-ensure          t
+      auto-window-vscroll                nil)
 
 
 ;; Font
@@ -93,7 +94,7 @@
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 ;; Start Emacs server to receive emacsclient request
-(server-start)
+;; (server-start)
 
 (provide 'base)
 ;;; base ends here
