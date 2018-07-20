@@ -2,6 +2,10 @@
 ;;; Commentary:
 ;;; Code:
 
+(use-package delight)
+
+(use-package diminish)
+
 (use-package ace-window
   :init
   (progn
@@ -23,19 +27,15 @@
   (setq company-idle-delay 0))
 
 (use-package company-quickhelp
-    :config
+  :config
   (add-hook 'after-init-hook 'company-quickhelp-mode))
 
 (use-package dashboard
   :config
   (dashboard-setup-startup-hook)
   (setq dashboard-items '((recents  . 5)
-                        (projects . 5)
-                        (agenda . 5))))
-
-(use-package delight)
-
-(use-package diminish)
+                          (projects . 5)
+                          (agenda . 5))))
 
 (use-package ediff
   :config
@@ -64,18 +64,8 @@
   :defer t
   :diminish
   :config
-  ;; (defun my/use-eslint-from-node-modules ()
-  ;; (let* ((root (locate-dominating-file
-  ;;               (or (buffer-file-name) default-directory)
-  ;;               "node_modules"))
-  ;;        (eslint (and root
-  ;;                     (expand-file-name "node_modules/.bin/eslint"
-  ;;                                       root))))
-  ;;   (when (and eslint (file-executable-p eslint))
-  ;;     (setq-local flycheck-javascript-eslint-executable eslint))))
-  ;; (add-hook 'flycheck-mode-hook #'my/use-eslint-from-node-modules)
   (setq flycheck-javascript-eslint-executable "eslint_d")
-  (global-flycheck-mode))
+  (global-flycheck-mode 1))
 
 (use-package counsel
   :bind
@@ -174,9 +164,9 @@
 
 (use-package page-break-lines)
 
-;; (use-package powerline
-;;   :init
-;;   (powerline-default-theme))
+(use-package powerline
+  :init
+  (powerline-center-theme))
 
 (use-package projectile
   :delight '(:eval (concat " [" (projectile-project-name) "]"))

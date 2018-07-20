@@ -16,48 +16,44 @@
   :config
   (custom-set-variables '(js2-strict-inconsistent-return-warning nil))
   (custom-set-variables '(js2-strict-missing-semi-warning nil))
-  (setq js2-global-externs '("define" "require" "app"))
-  (setq js2-include-node-externs t)
-  (setq js2-pretty-multiline-declarations nil)
-  (setq-default indent-tabs-mode nil))
+  (setq js2-global-externs '("define" "require" "app")
+	js2-include-node-externs t)
+  (setq-default indent-tabs-mode nil
+ js-indent-level 2
+		js2-basic-offset 2))
 
 (use-package json-mode
   :mode
   ("\\.json$" . json-mode))
-
-(setq js-indent-level 2)
-(setq js2-indent-level 2)
-(setq js2-basic-offset 2)
 
 ;; tern :- IDE like features for javascript and completion
 ;; http://ternjs.net/doc/manual.html#emacs
 (use-package tern
   :defer t
   :delight
+  :if (executable-find "tern")
+  :init (add-hook 'js2-mode-hook 'tern-mode)
   :config
-  (defun my-js-mode-hook ()
-    "Hook for `js-mode'."
-    (set (make-local-variable 'company-backends)
-	 '((company-tern company-files company-yasnippet))))
+  (add-to-list 'tern-command "--no-port-file" 'append)
   (define-key tern-mode-keymap (kbd "M-.") nil)
   (define-key tern-mode-keymap (kbd "M-,") nil)
-  (add-hook 'js2-mode-hook 'my-js-mode-hook)
-  (add-hook 'js2-mode-hook 'company-mode)
   (add-hook 'js2-mode-hook 'tern-mode))
 
 ;; company backend for tern
 ;; http://ternjs.net/doc/manual.html#emacs
 (use-package company-tern
+  :defer t
   :after tern
   :if (executable-find "tern")
+  :init (add-to-list 'company-backends 'company-tern)
   :config
   (setq company-tooltip-align-annotations t))
 
 ;; Run a JavaScript interpreter in an inferior process window
 ;; https://github.com/redguardtoo/js-comint
-(use-package js-comint
-  :config
-  (setq inferior-js-program-command "node"))
+;; (use-package js-comint
+;;   :config
+;;   (setq inferior-js-program-command "node"))
 
 ;; js2-refactor :- refactoring options for emacs
 ;; https://github.com/magnars/js2-refactor.el
@@ -89,27 +85,15 @@
 ;; indium: javascript awesome development environment
 ;; https://github.com/NicolasPetton/indium
 (use-package indium
+  :defer t
   :after js2-mode
   :bind (:map js2-mode-map
               ("C-c C-l" . indium-eval-buffer))
-  :hook ((js2-mode . indium-interaction-mode))
+  ;; :hook ((js2-mode . indium-interaction-mode))
   :config (diminish 'indium-interaction-mode))
 
 ;; typescript mode
 ;; https://github.com/ananthakumaran/tide
-(defun setup-tide-mode ()
-  "Setup typscript mode."
-  (interactive)
-  (tide-setup)
-  (flycheck-mode +1)
-  (setq flycheck-check-syntax-automatically '(save mode-enabled))
-  (eldoc-mode +1)
-  (tide-hl-identifier-mode +1)
-  ;; company is an optional dependency. You have to
-  ;; install it separately via package-install
-  ;; `M-x package-install [ret] company`
-  (company-mode +1))
-
 (use-package tide
   :mode (("\\.ts\\'" . typescript-mode))
   :config
