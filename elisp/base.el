@@ -2,6 +2,12 @@
 ;;; Commentary:
 ;;; Code:
 (package-initialize)
+
+(setq url-proxy-services
+      '(("no_proxy" . "^\\(localhost\\|10.*\\)")
+	("http" . "localhost:3128")
+	("https" . "localhost:3128")))
+
 (add-to-list 'package-archives
 	     '("melpa" . "https://melpa.org/packages/")
              '("elpy" . "http://jorgenschaefer.github.io/packages/"))
