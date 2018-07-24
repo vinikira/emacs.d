@@ -99,6 +99,9 @@
 ;; Delete trailing whitespace before save
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
+;; Optimize large files
+(add-hook 'find-file-hook 'my/find-file-check-make-large-file-read-only-hook)
+
 ;; Start Emacs server to receive emacsclient request
 ;; (server-start)
 

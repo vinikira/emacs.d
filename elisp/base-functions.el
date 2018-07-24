@@ -60,6 +60,13 @@
       (setq-local flycheck-javascript-eslint-executable eslint))))
 (add-hook 'flycheck-mode-hook #'my/use-eslint-from-node-modules)
 
+(defun my/find-file-check-make-large-file-read-only-hook ()
+  "If a file is over a given size, make the buffer read only."
+  (when (> (buffer-size) (* 1024 1024))
+    (setq buffer-read-only t)
+    (linum-mode)
+    (buffer-disable-undo)
+    (fundamental-mode)))
 
 (provide 'base-functions)
 ;;; base-functions ends here
