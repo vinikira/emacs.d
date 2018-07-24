@@ -5,8 +5,8 @@
 
 (setq url-proxy-services
       '(("no_proxy" . "^\\(localhost\\|10.*\\)")
-	("http" . "localhost:3128")
-	("https" . "localhost:3128")))
+	("http" . "172.16.21.239:8080")
+	("https" . "172.16.21.239:8080")))
 
 (add-to-list 'package-archives
 	     '("melpa" . "https://melpa.org/packages/")

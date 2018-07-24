@@ -178,20 +178,26 @@
 
   (projectile-mode))
 
-(use-package treemacs
-  :config
-  (progn
-    (setq treemacs-git-mode t))
-  :bind
-  (:map global-map
-        ([f8]        . treemacs)
-        ("M-0"       . treemacs-select-window)
-        ("C-c 1"     . treemacs-delete-other-windows)))
+;; (use-package treemacs
+;;   :config
+;;   (progn
+;;     (setq treemacs-git-mode t))
+;;   :bind
+;;   (:map global-map
+;;         ([f8]        . treemacs)
+;;         ("M-0"       . treemacs-select-window)
+;;         ("C-c 1"     . treemacs-delete-other-windows)))
 
-(use-package treemacs-projectile
-  :after treemacs
-  :config
-  (setq treemacs-header-function #'treemacs-projectile-create-header))
+;; (use-package treemacs-projectile
+;;   :after treemacs
+;;   :config
+;;   (setq treemacs-header-function #'treemacs-projectile-create-header))
+
+(use-package neotree
+  :config (setq neo-theme (if (display-graphic-p) 'default))
+  :bind (:map global-map
+              ([f8] . neotree-toggle)
+              ([f2] . neotree-projectile-action)))
 
 (use-package try)
 
