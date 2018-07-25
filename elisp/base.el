@@ -96,6 +96,10 @@
 
 (show-paren-mode 1)
 
+(display-line-numbers-mode 1)
+
+(hl-line-mode 1)
+
 ;; Delete trailing whitespace before save
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
