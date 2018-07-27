@@ -2,9 +2,11 @@
 ;;; Commentary:
 ;;; Code:
 
-(use-package delight)
+(use-package delight
+  :ensure t)
 
-(use-package diminish)
+(use-package diminish
+  :ensure t)
 
 (use-package ace-window
   :init
@@ -34,8 +36,8 @@
   :config
   (dashboard-setup-startup-hook)
   (setq dashboard-items '((recents  . 5)
-                        (projects . 5)
-                        (agenda . 5))))
+                          (projects . 5)
+                          (agenda . 5))))
 
 (use-package ediff
   :config

@@ -45,19 +45,20 @@
       ;; http://ergoemacs.org/emacs/emacs_stop_cursor_enter_prompt.html
       minibuffer-prompt-properties
       '(read-only t point-entered minibuffer-avoid-prompt face minibuffer-prompt)
-
       ;; Disable non selected window highlight
       cursor-in-non-selected-windows     nil
       highlight-nonselected-windows      nil
       ;; PATH
-      exec-path                          (append exec-path '("/usr/local/bin/"))
+      exec-path                          (append exec-path '("/usr/local/bin/" "C:/Python30"))
       indent-tabs-mode                   nil
       inhibit-startup-message            t
       fringes-outside-margins            t
       select-enable-clipboard            t
-      use-package-always-ensure          t
       auto-window-vscroll                nil)
 
+(setq-default
+ use-package-always-ensure          t
+ explicit-shell-file-name           "c:/Program Files/Git/bin/bash.exe")
 
 ;; Font
 (set-frame-font "Fira Mono:style=Regular:pixelsize=14:antialias=yes")
@@ -78,8 +79,7 @@
  make-backup-files                  t
  create-lockfiles                   nil
  backup-directory-alist            `((".*" . ,(concat temp-dir "/backup/")))
- auto-save-file-name-transforms    `((".*" ,(concat temp-dir "/backup/") t))
- )
+ auto-save-file-name-transforms    `((".*" ,(concat temp-dir "/backup/") t)))
 
 (fset 'yes-or-no-p 'y-or-n-p)
 (global-auto-revert-mode t)
@@ -96,9 +96,10 @@
 
 (show-paren-mode 1)
 
-(display-line-numbers-mode 1)
+;; Vanilla line numbers
+(global-display-line-numbers-mode)
 
-(hl-line-mode 1)
+(global-hl-line-mode)
 
 ;; Delete trailing whitespace before save
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
