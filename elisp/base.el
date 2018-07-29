@@ -77,8 +77,11 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 (global-auto-revert-mode t)
 
-(diminish 'auto-revert-mode)
-(diminish 'page-break-lines-mode)
+;; Diminish default modes
+(when (fboundp 'diminish)
+    (lambda ()
+      (diminish 'auto-revert-mode)
+      (diminish 'page-break-lines-mode)))
 
 ;; Disable toolbar & menubar
 (menu-bar-mode -1)
@@ -88,6 +91,10 @@
   (scroll-bar-mode -1))
 
 (show-paren-mode 1)
+
+;; Vanilla line numbers
+(global-display-line-numbers-mode)
+(global-hl-line-mode)
 
 ;; Delete trailing whitespace before save
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
