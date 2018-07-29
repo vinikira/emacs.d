@@ -164,9 +164,9 @@
 
 (use-package page-break-lines)
 
-(use-package powerline
-  :init
-  (powerline-center-theme))
+;; (use-package powerline
+;;   :init
+;;   (powerline-center-theme))
 
 (use-package projectile
   :delight '(:eval (concat " [" (projectile-project-name) "]"))
