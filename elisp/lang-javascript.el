@@ -16,11 +16,31 @@
   :config
   (custom-set-variables '(js2-strict-inconsistent-return-warning nil))
   (custom-set-variables '(js2-strict-missing-semi-warning nil))
+  (add-hook 'js2-mode-hook #'js2-imenu-extras-mode)
   (setq js2-global-externs '("define" "require" "app")
 	js2-include-node-externs t)
   (setq-default indent-tabs-mode nil
- js-indent-level 2
+                js-indent-level 2
 		js2-basic-offset 2))
+
+;; js2-refactor :- refactoring options for emacs
+;; https://github.com/magnars/js2-refactor.el
+(use-package js2-refactor
+  :delight
+  :after (js2-mode)
+  :config
+  (js2r-add-keybindings-with-prefix "C-c j r")
+  (define-key js2-mode-map (kbd "C-k") #'js2r-kill)
+  (add-hook 'js2-mode-hook 'js2-refactor-mode))
+
+(use-package xref-js2
+  :delight
+  :if (executable-find "ag")
+  :after (js2-mode)
+  :config
+  (add-hook 'js2-mode-hook
+            (lambda ()
+              (add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t))))
 
 (use-package json-mode
   :mode
@@ -32,7 +52,6 @@
   :defer t
   :delight
   :if (executable-find "tern")
-  :init (add-hook 'js2-mode-hook 'tern-mode)
   :config
   (add-to-list 'tern-command "--no-port-file" 'append)
   (define-key tern-mode-keymap (kbd "M-.") nil)
@@ -48,30 +67,6 @@
   :init (add-to-list 'company-backends 'company-tern)
   :config
   (setq company-tooltip-align-annotations t))
-
-;; Run a JavaScript interpreter in an inferior process window
-;; https://github.com/redguardtoo/js-comint
-;; (use-package js-comint
-;;   :config
-;;   (setq inferior-js-program-command "node"))
-
-;; js2-refactor :- refactoring options for emacs
-;; https://github.com/magnars/js2-refactor.el
-(use-package js2-refactor
-  :diminish
-  :after (js2-mode)
-  :config
-  (js2r-add-keybindings-with-prefix "C-c j r")
-  (add-hook 'js2-mode-hook 'js2-refactor-mode))
-
-;;prettier-js - format javascript source codes
-;;https://github.com/prettier/prettier-emacs
-;; (use-package prettier-js
-;;   :config
-;;   (add-hook 'js2-mode-hook 'prettier-js-mode)
-;;   ;;eslint support
-;;   (add-hook 'js2-mode-hook (lambda () (add-hook 'after-save-hook #'eslint-fix-file t))))
-
 
 (use-package rjsx-mode
   :ensure t
@@ -89,7 +84,7 @@
   :after js2-mode
   :bind (:map js2-mode-map
               ("C-c C-l" . indium-eval-buffer))
-  ;; :hook ((js2-mode . indium-interaction-mode))
+  ;; :hook (js2-mode . indium-interaction-mode)
   :config (diminish 'indium-interaction-mode))
 
 ;; typescript mode
