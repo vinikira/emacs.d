@@ -100,14 +100,17 @@
 (show-paren-mode 1)
 
 ;; Vanilla line numbers
-(global-display-line-numbers-mode)
-(global-hl-line-mode)
+(if (version<= "26.0.50" emacs-version )
+  (lambda ()
+    (global-display-line-numbers-mode)
+    (global-hl-line-mode))
+  (global-linum-mode))
 
 ;; Delete trailing whitespace before save
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 ;; Optimize large files
-(add-hook 'find-file-hook 'my/find-file-check-make-large-file-read-only-hook)
+;; (add-hook 'find-file-hook 'my/find-file-check-make-large-file-read-only-hook)
 
 ;; Start Emacs server to receive emacsclient request
 ;; (server-start)
