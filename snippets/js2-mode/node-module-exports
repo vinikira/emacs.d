@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: node-module-exports
+# key: mde
+# --
+module.exports = ${1: export}
