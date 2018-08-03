@@ -49,7 +49,7 @@
   ;; https://github.com/smihica/emmet-mode
   (use-package emmet-mode
     :init (setq emmet-move-cursor-between-quotes t) ;; default nil
-    :diminish (emmet-mode . " e"))
+    :delight (emmet-mode " e"))
   (add-hook 'web-mode-hook 'emmet-mode)
   (add-hook 'vue-mode-hook 'emmet-mode)
 
@@ -95,7 +95,7 @@
 ;; impatient mode - Live refresh of web pages
 ;; https://github.com/skeeto/impatient-mode
 (use-package impatient-mode
-  :diminish (impatient-mode . " i")
+  :delight
   :commands (impatient-mode))
 
 ;; Pug mode
