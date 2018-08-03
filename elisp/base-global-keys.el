@@ -4,8 +4,8 @@
 ;;; (global-set-key (kbd "[SHORTCUT]") '[FUNCTION])
 ;;; Code:
 
-(global-set-key (kbd "C-x 2") 'split-window-below-and-switch)
-(global-set-key (kbd "C-x 3") 'split-window-right-and-switch)
+(global-set-key (kbd "C-x 2") 'vs/split-window-below-and-switch)
+(global-set-key (kbd "C-x 3") 'vs/split-window-right-and-switch)
 
 (global-set-key (kbd "M-<down>") 'enlarge-window)
 (global-set-key (kbd "M-<up>") 'shrink-window)

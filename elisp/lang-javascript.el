@@ -14,14 +14,16 @@
   :mode
   ("\\.js$" . js2-mode)
   :config
-  (custom-set-variables '(js2-strict-inconsistent-return-warning nil))
-  (custom-set-variables '(js2-strict-missing-semi-warning nil))
+  (custom-set-variables '(js2-mode-show-parse-errors nil))
+  (custom-set-variables '(js2-mode-show-strict-warnings nil))
   (add-hook 'js2-mode-hook #'js2-imenu-extras-mode)
   (setq js2-global-externs '("define" "require" "app")
 	js2-include-node-externs t)
   (setq-default indent-tabs-mode nil
                 js-indent-level 2
-		js2-basic-offset 2))
+		js2-basic-offset 2)
+  (cond ((executable-find "standard") '(flycheck-checker . javascript-standard))
+        ((executable-find "eslint_d") '(flycheck-checker . javascript-eslint))))
 
 ;; js2-refactor :- refactoring options for emacs
 ;; https://github.com/magnars/js2-refactor.el
@@ -85,18 +87,22 @@
   :bind (:map js2-mode-map
               ("C-c C-l" . indium-eval-buffer))
   ;; :hook (js2-mode . indium-interaction-mode)
-  :config (diminish 'indium-interaction-mode))
+  :config (delight indium-interaction-mode))
 
 ;; typescript mode
 ;; https://github.com/ananthakumaran/tide
 (use-package tide
   :mode (("\\.ts\\'" . typescript-mode))
   :config
-  (setup-tide-mode)
   (setq company-tooltip-align-annotations t)
   ;; formats the buffer before saving
   (add-hook 'before-save-hook 'tide-format-before-save)
-  (add-hook 'typescript-mode-hook #'setup-tide-mode))
+  (add-hook 'typescript-mode-hook
+	    '(lambda ()
+	       "Setup typscript mode."
+	       (interactive)
+	       (setq flycheck-check-syntax-automatically '(save mode-enabled))
+	       (tide-hl-identifier-mode +1))))
 
 (provide 'lang-javascript)
 ;;; lang-javascript ends here

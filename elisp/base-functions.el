@@ -5,24 +5,24 @@
 ;;;    (do-something))
 ;;; Code:
 
-(defun split-window-below-and-switch ()
+(defun vs/split-window-below-and-switch ()
   "Split the window horizontally, then switch to the new pane."
   (interactive)
   (split-window-below)
   (other-window 1))
 
-(defun split-window-right-and-switch ()
+(defun vs/split-window-right-and-switch ()
   "Split the window vertically, then switch to the new pane."
   (interactive)
   (split-window-right)
   (other-window 1))
 
-(defun close-all-buffers ()
+(defun vs/close-all-buffers ()
   "Close all buffers in list."
   (interactive)
   (mapc 'kill-buffer (buffer-list)))
 
-(defun eslint-find-binary ()
+(defun vs/eslint-find-binary ()
   (or
    (let ((root (locate-dominating-file buffer-file-name "node_modules")))
      (if root
@@ -30,7 +30,7 @@
            (if (file-executable-p eslint) eslint))))
    (error "Couldn't find a eslint executable. Please run command: \"sudo npm i eslint --save-dev\"")))
 
-(defun eslint-fix-file ()
+(defun vs/eslint-fix-file ()
   "Format the current file with ESLint."
   (interactive)
   (progn (call-process
@@ -39,17 +39,7 @@
           buffer-file-name "--fix")
          (revert-buffer t t t)))
 
-(defun setup-tide-mode ()
-  "Setup typscript mode."
-  (interactive)
-  (tide-setup)
-  (flycheck-mode +1)
-  (setq flycheck-check-syntax-automatically '(save mode-enabled))
-  (eldoc-mode +1)
-  (tide-hl-identifier-mode +1)
-  (company-mode +1))
-
-(defun my/use-eslint-from-node-modules ()
+(defun vs/use-eslint-from-node-modules ()
   (let* ((root (locate-dominating-file
                 (or (buffer-file-name) default-directory)
                 "node_modules"))
@@ -58,7 +48,7 @@
                                         root))))
     (when (and eslint (file-executable-p eslint))
       (setq-local flycheck-javascript-eslint-executable eslint))))
-(add-hook 'flycheck-mode-hook #'my/use-eslint-from-node-modules)
+(add-hook 'flycheck-mode-hook #'vs/use-eslint-from-node-modules)
 
 (provide 'base-functions)
 ;;; base-functions ends here

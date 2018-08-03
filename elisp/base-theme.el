@@ -3,31 +3,20 @@
 ;;; Code:
 
 (use-package material-theme
-  :ensure t
-  :defer t
-  ;; :init
-  ;; (load-theme 'material t)
-  )
+  :defer t)
 
 ;; Zero dark theme
 ;; https://github.com/NicolasPetton/zerodark-theme
 (use-package zerodark-theme
-  :defer t
-  :init
-  (load-theme 'zerodark t)
-  (zerodark-setup-modeline-format))
+  :defer t)
 
 (use-package spacemacs-theme
-  :defer t
-  ;; :init
-  ;; (load-theme 'spacemacs-dark t)
-  )
+  :defer t)
 
 (use-package monokai-theme
-  :defer t
-  ;; :init
-  ;; (load-theme 'monokai t)
-  )
+  :defer t)
+
+(load-theme 'zerodark t)
 
 (provide 'base-theme)
 ;;; base-theme ends here

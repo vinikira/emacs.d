@@ -10,7 +10,5 @@
         slime-net-coding-system 'utf-8-unix
         slime1-contribs '(slime-fancy)))
 
-
-
 (provide 'lang-lisp)
 ;;; lang-lisp ends here

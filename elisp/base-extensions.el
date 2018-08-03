@@ -4,8 +4,6 @@
 
 (use-package delight)
 
-(use-package diminish)
-
 (use-package ace-window
   :init
   (progn
@@ -20,13 +18,14 @@
   ("C-c SPC" . avy-goto-char))
 
 (use-package company
-  :diminish 'company-mode
+  :delight
   :config
   (add-hook 'after-init-hook 'global-company-mode)
-  (setq company-dabbrev-downcase 0)
+  (setq-default company-dabbrev-downcase 0)
   (setq company-idle-delay 0))
 
 (use-package company-quickhelp
+  :if (fboundp 'company)
   :config
   (add-hook 'after-init-hook 'company-quickhelp-mode))
 
@@ -38,13 +37,15 @@
                           (agenda . 5))))
 
 (use-package ediff
+  :defer t
   :config
   (setq ediff-window-setup-function 'ediff-setup-windows-plain)
   (setq-default ediff-highlight-all-diffs 'nil)
   (setq ediff-diff-options "-w"))
 
 (use-package editorconfig
-  :diminish 'editorconfig-mode
+  :delight
+  :defer t
   :config
   (editorconfig-mode 1))
 
@@ -57,12 +58,13 @@
     (exec-path-from-shell-initialize)))
 
 (use-package expand-region
+  :defer t
   :bind
   ("C-=" . er/expand-region))
 
 (use-package flycheck
   :defer t
-  :diminish
+  :delight
   :config
   (setq flycheck-javascript-eslint-executable "eslint_d")
   (global-flycheck-mode 1))
@@ -82,7 +84,7 @@
   (counsel-projectile-on))
 
 (use-package ivy
-  :diminish 'ivy-mode
+  :delight
   :bind
   ("C-x s" . swiper)
   ("C-x C-r" . ivy-resume)
@@ -92,6 +94,8 @@
   (define-key read-expression-map (kbd "C-r") 'counsel-expression-history))
 
 (use-package magit
+  :defer t
+  :if (executable-find "git")
   :config
   (setq magit-completing-read-function 'ivy-completing-read)
   :bind
@@ -104,12 +108,14 @@
   ("C-x g e" . magit-ediff-resolve)
   ("C-x g r" . magit-rebase-interactive))
 
-(use-package magit-popup)
+(use-package magit-popup
+  :if (fboundp 'magit))
 
 (use-package markdown-mode
   :mode ("\\.\\(m\\(ark\\)?down\\|md\\)$" . markdown-mode))
 
 (use-package multiple-cursors
+  :defer t
   :bind
   ("C-S-c C-S-c" . mc/edit-lines)
   ("C->" . mc/mark-next-like-this)
@@ -118,9 +124,11 @@
 
 (use-package org
   :config
-  (setq org-directory "~/Dropbox/org-files"
-        org-default-notes-file (concat org-directory "/todo.org")
-        org-agenda-files '("~/Dropbox/org-files")
+  (setq org-directory (if (file-directory-p "~/Dropbox/org-files")
+ 			  "~/Dropbox/org-files"
+ 			"~/")
+	org-default-notes-file (concat org-directory "/todo.org")
+        org-agenda-files (list org-directory)
         org-src-fontify-natively t
         org-log-done 'time
         org-capture-templates
@@ -155,38 +163,32 @@
 
 (use-package page-break-lines)
 
-;; (use-package powerline
-;;   :init
-;;   (powerline-center-theme))
+(use-package powerline
+  :config
+  (powerline-center-theme))
 
 (use-package projectile
   :delight '(:eval (concat " [" (projectile-project-name) "]"))
   :config
   (setq projectile-known-projects-file
-        (expand-file-name "projectile-bookmarks.eld" temp-dir))
-
-  (setq projectile-completion-system 'ivy)
-
+        (expand-file-name "projectile-bookmarks.eld" temp-dir)
+  projectile-completion-system 'ivy)
   (projectile-mode))
 
-(use-package treemacs
+(use-package neotree
   :config
-  (progn
-    (setq treemacs-git-mode t))
+  (setq-default treemacs-git-mode t)
+  (setq neo-theme 'arrows)
   :bind
   (:map global-map
-        ([f8]        . treemacs)
-        ("M-0"       . treemacs-select-window)
-        ("C-c 1"     . treemacs-delete-other-windows)))
+        ([f8]        . neotree-toggle)
+        ([f2]       . neotree-projectile-action)))
 
-(use-package treemacs-projectile
-  :after treemacs
-  :config
-  (setq treemacs-header-function #'treemacs-projectile-create-header))
-
-(use-package try)
+(use-package try
+  :defer t)
 
 (use-package twittering-mode
+  :defer t
   :config
   (setq twittering-icon-mode t
 	twittering-use-master-password t))
@@ -197,20 +199,22 @@
   (recentf-mode 1))
 
 (use-package restclient
+  :defer t
   :mode
   ("\\.http$" . restclient-mode)
   ("\\.https$" . restclient-mode))
 
-(use-package restclient-test)
+(use-package restclient-test
+  :defer t
+  :if (fboundp 'restclient)
+  :after (restclient-mode))
 
 (use-package smartparens
   :delight
   :config (smartparens-global-mode))
 
-(use-package smex)
-
 (use-package undo-tree
-  :diminish 'undo-tree-mode
+  :delight
   :config
   ;; Remember undo history
   (setq
@@ -219,7 +223,8 @@
   (global-undo-tree-mode 1))
 
 (use-package which-key
-  :diminish 'which-key-mode
+  :delight
+  :defer t
   :config
   (which-key-mode))
 
@@ -230,19 +235,27 @@
   ("C-x <left>" . windmove-left)
   ("C-x <right>" . windmove-right))
 
-(use-package wgrep)
+(use-package wgrep
+  :defer t
+  :if (executable-find "grep"))
 
 (use-package xclip
+  :defer t
+  :if (executable-find "xclip")
   :config (xclip-mode))
 
 (use-package yasnippet
-  :diminish 'yas-minor-mode
+  :defer t
+  :delight
   :init (setq yas-snippet-dirs
-              '("~/.emacs.d/snippets/" yas-installed-snippets-dir))
+              '("~/.emacs.d/snippets/"))
   :config
   (yas-global-mode 1))
 
-(use-package yasnippet-snippets)
+(use-package yasnippet-snippets
+  :delight
+  :defer t
+  :after (yas-global-mode))
 
 (provide 'base-extensions)
 ;;; base-extensions ends here
