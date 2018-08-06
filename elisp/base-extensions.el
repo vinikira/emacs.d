@@ -163,9 +163,9 @@
 
 (use-package page-break-lines)
 
-(use-package powerline
+(use-package telephone-line
   :config
-  (powerline-center-theme))
+  (telephone-line-mode))
 
 (use-package projectile
   :delight '(:eval (concat " [" (projectile-project-name) "]"))
