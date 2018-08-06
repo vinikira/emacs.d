@@ -59,7 +59,14 @@
       make-backup-files                  t
       create-lockfiles                   nil
       backup-directory-alist            `((".*" . ,(concat temp-dir "/backup/")))
-      auto-save-file-name-transforms    `((".*" ,(concat temp-dir "/backup/") t)))
+      auto-save-file-name-transforms    `((".*" ,(concat temp-dir "/backup/") t))
+      
+      ;; smooth scroling
+      redisplay-dont-pause t
+      scroll-margin 1
+      scroll-step 1
+      scroll-conservatively 10000
+      scroll-preserve-screen-position nil))
 
 (setq-default  use-package-always-ensure          t
 
