@@ -60,13 +60,13 @@
       create-lockfiles                   nil
       backup-directory-alist            `((".*" . ,(concat temp-dir "/backup/")))
       auto-save-file-name-transforms    `((".*" ,(concat temp-dir "/backup/") t))
-      
+
       ;; smooth scroling
       redisplay-dont-pause t
       scroll-margin 1
       scroll-step 1
       scroll-conservatively 10000
-      scroll-preserve-screen-position nil))
+      scroll-preserve-screen-position nil)
 
 (setq-default  use-package-always-ensure          t
 
@@ -84,18 +84,18 @@
 (global-auto-revert-mode t)
 (show-paren-mode 1)
 (if (fboundp 'global-display-line-numbers-mode)
-  (lambda ()
+  (funcall (lambda ()
     (global-display-line-numbers-mode)
-    (global-hl-line-mode))
+    (global-hl-line-mode)))
   (global-linum-mode))
 
 ;; Delight default modes
 (when (fboundp 'delight)
-  (lambda ()
+  (funcall (lambda ()
     (require 'delight)
     (delight '((auto-revert-mode)
 	       (page-break-lines-mode)
-	       (eldoc-mode)))))
+	       (eldoc-mode))))))
 
 ;; Disable toolbar & menubar
 (menu-bar-mode -1)

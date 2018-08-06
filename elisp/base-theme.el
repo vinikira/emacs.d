@@ -16,7 +16,10 @@
 (use-package monokai-theme
   :defer t)
 
-(load-theme 'zerodark t)
+(use-package kaolin-themes
+  :defer t
+  :init
+  (load-theme 'kaolin-valley-dark t))
 
 (provide 'base-theme)
 ;;; base-theme ends here
