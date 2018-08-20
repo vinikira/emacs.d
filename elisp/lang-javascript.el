@@ -30,10 +30,10 @@
 (use-package js2-refactor
   :delight
   :after (js2-mode)
+  :hook (js2-mode . js2-refactor-mode)
   :config
   (js2r-add-keybindings-with-prefix "C-c j r")
-  (define-key js2-mode-map (kbd "C-k") #'js2r-kill)
-  (add-hook 'js2-mode-hook 'js2-refactor-mode))
+  (define-key js2-mode-map (kbd "C-k") #'js2r-kill))
 
 (use-package xref-js2
   :delight
@@ -54,11 +54,11 @@
   :defer t
   :delight
   :if (executable-find "tern")
+  :hook (js2-mode . tern-mode)
   :config
   (add-to-list 'tern-command "--no-port-file" 'append)
   (define-key tern-mode-keymap (kbd "M-.") nil)
-  (define-key tern-mode-keymap (kbd "M-,") nil)
-  (add-hook 'js2-mode-hook 'tern-mode))
+  (define-key tern-mode-keymap (kbd "M-,") nil))
 
 ;; company backend for tern
 ;; http://ternjs.net/doc/manual.html#emacs
@@ -71,7 +71,6 @@
   (setq company-tooltip-align-annotations t))
 
 (use-package rjsx-mode
-  :ensure t
   :mode
   ("\\.jsx$" . js2-jsx-mode))
 
@@ -86,7 +85,6 @@
   :after js2-mode
   :bind (:map js2-mode-map
               ("C-c C-l" . indium-eval-buffer))
-  ;; :hook (js2-mode . indium-interaction-mode)
   :config (delight indium-interaction-mode))
 
 ;; typescript mode
