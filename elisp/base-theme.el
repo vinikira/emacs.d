@@ -17,8 +17,7 @@
   :defer t)
 
 (use-package kaolin-themes
-  :defer t
-  :init
+  :config
   (load-theme 'kaolin-valley-dark t))
 
 (provide 'base-theme)
