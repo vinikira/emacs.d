@@ -90,7 +90,7 @@
 (defun vs/set-font (font-name)
   "Set frame font if they is installed in system using FONT-NAME."
 (when (find-font (font-spec :name font-name))
-  (set-frame-font (concat font-name ":style=Regular:pixelsize=14:antialias=yes"))))
+  (set-frame-font (concat font-name ":style=Regular:pixelsize=12:antialias=yes"))))
 
 (vs/set-font "Roboto Mono")
 

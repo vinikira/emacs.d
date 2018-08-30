@@ -19,7 +19,9 @@
 (use-package kaolin-themes
   :defer t
   :init
-  (load-theme 'kaolin-valley-dark t))
+  (if (display-graphic-p)
+      (load-theme 'kaolin-valley-dark t)
+    (load-theme 'kaolin-dark t)))
 
 (provide 'base-theme)
 ;;; base-theme ends here
