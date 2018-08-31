@@ -161,6 +161,8 @@
             (lambda ()
               (org-bullets-mode t))))
 
+(use-package ox-reveal)
+
 (use-package page-break-lines)
 
 (use-package telephone-line
