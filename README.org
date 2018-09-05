@@ -5,3 +5,6 @@
 *** Web (html + css)
 *** Lisp
 *** Python
+*** Clojure
+*** Rust
+*** PlantUML
