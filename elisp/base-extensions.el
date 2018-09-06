@@ -60,12 +60,13 @@
 (use-package expand-region
   :defer t
   :bind
-  ("C-=" . er/expand-region))
+  ("C-c e r" . er/expand-region)
+  ("C-c e p" . er/mark-inside-pairs))
 
 (use-package flycheck
   :defer t
   :delight
-  :config
+  :init
   (setq flycheck-javascript-eslint-executable "eslint_d")
   (global-flycheck-mode 1))
 
@@ -244,7 +245,7 @@
 (use-package xclip
   :defer t
   :if (executable-find "xclip")
-  :config (xclip-mode))
+  :init (xclip-mode))
 
 (use-package yasnippet
   :defer t
