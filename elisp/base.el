@@ -10,11 +10,12 @@
 (add-hook 'after-init-hook '(lambda ()
                               (setq gc-cons-threshold (car (get 'gc-cons-threshold 'standard-value))
                                     gc-cons-percentage (car (get 'gc-cons-percentage 'standard-value)))))
+									
 (setq url-proxy-services
       '(("no_proxy" . "^\\(localhost\\|10.*\\)")
 	("http" . "172.16.21.239:8080")
 	("https" . "172.16.21.239:8080")))
-
+	
 (package-initialize)
 (setq package-archives '(("melpa" . "https://melpa.org/packages/")
                          ("elpy" . "http://jorgenschaefer.github.io/packages/")
