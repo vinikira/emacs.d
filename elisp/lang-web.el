@@ -1,7 +1,6 @@
 ;;; lang-web --- Lang Web
 ;;; Commentary:
 ;;; Code:
-
 (use-package web-mode
   :bind (("C-c ]" . emmet-next-edit-point)
          ("C-c [" . emmet-prev-edit-point)
@@ -74,8 +73,6 @@
 
   ;; to get completion data for angularJS
   (use-package ac-html-angular :defer t)
-  ;; to get completion for twitter bootstrap
-  (use-package ac-html-bootstrap :defer t)
 
   ;; to get completion for HTML stuff
   ;; https://github.com/osv/company-web

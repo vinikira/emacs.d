@@ -1,16 +1,24 @@
 ;;; base.el --- base settings
 ;;; Commentary:
 ;;; Code:
+
+;; Speed up a little emacs loadtime when reduce the number of GC executions
+;; during init evaluation and then reset to default value
+(setq gc-cons-threshold (* 64 1024 1024)
+      gc-cons-percentage 0.8)
+
+(add-hook 'after-init-hook '(lambda ()
+                              (setq gc-cons-threshold (car (get 'gc-cons-threshold 'standard-value))
+                                    gc-cons-percentage (car (get 'gc-cons-percentage 'standard-value)))))
 (setq url-proxy-services
       '(("no_proxy" . "^\\(localhost\\|10.*\\)")
 	("http" . "172.16.21.239:8080")
 	("https" . "172.16.21.239:8080")))
 
 (package-initialize)
-(add-to-list 'package-archives
-	     '("melpa" . "https://melpa.org/packages/")
-             '("elpy" . "http://jorgenschaefer.github.io/packages/"))
-(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
+(setq package-archives '(("melpa" . "https://melpa.org/packages/")
+                         ("elpy" . "http://jorgenschaefer.github.io/packages/")
+                         ("org" . "http://orgmode.org/elpa/")))
 
 (when (not package-archive-contents)
   (package-refresh-contents))
@@ -67,11 +75,15 @@
       auto-save-file-name-transforms    `((".*" ,(concat temp-dir "/backup/") t))
 
       ;; smooth scroling
-      redisplay-dont-pause t
-      scroll-margin 1
-      scroll-step 1
-      scroll-conservatively 10000
-      scroll-preserve-screen-position nil)
+      redisplay-dont-pause               t
+      scroll-margin                      1
+      scroll-step                        1
+      scroll-conservatively              10000
+      scroll-preserve-screen-position    nil
+
+      ;; disable line wrap
+      truncate-lines                     t)
+
 
 (setq-default  use-package-always-ensure          t
 
@@ -83,7 +95,12 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 
 ;; Font
-(set-frame-font "Fira Mono:style=Regular:pixelsize=14:antialias=yes")
+(defun vs/set-font (font-name)
+  "Set frame font if they is installed in system using FONT-NAME."
+(when (find-font (font-spec :name font-name))
+  (set-frame-font (concat font-name ":style=Regular:pixelsize=12:antialias=yes"))))
+
+(vs/set-font "Roboto Mono")
 
 ;; Default modes
 (global-auto-revert-mode t)

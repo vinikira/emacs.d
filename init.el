@@ -25,4 +25,5 @@
 (require 'lang-elixir)
 (require 'lang-clojure)
 (require 'lang-plantuml)
+(require 'lang-rust)
 ;;; init.el ends here
