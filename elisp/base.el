@@ -93,10 +93,10 @@
 ;; Font
 (defun vs/set-font (font-name)
   "Set frame font if they is installed in system using FONT-NAME."
-(when (find-font (font-spec :name font-name))
-  (set-frame-font (concat font-name ":style=Regular:pixelsize=12:antialias=yes"))))
+  (when (member font-name (font-family-list))
+    (set-frame-font (concat font-name ":style=Regular:pixelsize=12:antialias=yes") t t)))
 
-(vs/set-font "Roboto Mono")
+(vs/set-font "Hack")
 
 ;; Default modes
 (global-auto-revert-mode t)
