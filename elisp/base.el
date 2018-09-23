@@ -1,4 +1,4 @@
-;;; base.el --- base settings
+;; base.el --- base settings
 ;;; Commentary:
 ;;; Code:
 
@@ -81,22 +81,31 @@
       truncate-lines                     t)
 
 
-(setq-default  use-package-always-ensure          t
+(setq-default  use-package-always-ensure t
 
 	       ;; Bookmarks
 	       ;; persistent bookmarks
-	       bookmark-save-flag                 t
-	       bookmark-default-file              (concat temp-dir "/bookmarks"))
+	       bookmark-save-flag        t
+	       bookmark-default-file     (concat temp-dir "/bookmarks"))
 
 (fset 'yes-or-no-p 'y-or-n-p)
 
 ;; Font
-(defun vs/set-font (font-name)
-  "Set frame font if they is installed in system using FONT-NAME."
+(defun vs/set-font (font-name size)
+  "Set frame font and SIZE if they is installed in system using FONT-NAME."
   (when (member font-name (font-family-list))
-    (set-frame-font (concat font-name ":style=Regular:pixelsize=12:antialias=yes") t t)))
+    (add-to-list 'default-frame-alist `(font . ,(format "%s-%d" font-name size)))
+    (set-face-attribute 'default nil :font (format "%s-%d" font-name size))
+    (set-frame-font (format "%s-%d" font-name size) nil t)))
 
-(vs/set-font "Hack")
+(defun vs/load-frame-font (frame)
+	  "FRAME."
+	  (select-frame frame)
+	  (vs/set-font "Hack" 10))
+
+(if (daemonp)
+      (add-hook 'after-make-frame-functions #'vs/load-frame-font)
+    (vs/set-font "Hack" 10))
 
 ;; Default modes
 (global-auto-revert-mode t)

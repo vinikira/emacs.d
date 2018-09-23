@@ -21,7 +21,7 @@
 	js2-include-node-externs t)
   (setq-default indent-tabs-mode nil
                 js-indent-level 2
-		js2-basic-offset 2)
+        	js2-basic-offset 2)
   (cond ((executable-find "standard") '(flycheck-checker . javascript-standard))
         ((executable-find "eslint_d") '(flycheck-checker . javascript-eslint))))
 
