@@ -115,6 +115,12 @@
 (use-package markdown-mode
   :mode ("\\.\\(m\\(ark\\)?down\\|md\\)$" . markdown-mode))
 
+(use-package markdownfmt
+  :config
+  (add-hook 'markdown-mode-hook #'markdownfmt-enable-on-save)
+  :bind
+  ("C-c C-f" . markdownfmt-format-buffer))
+
 (use-package multiple-cursors
   :defer t
   :bind
