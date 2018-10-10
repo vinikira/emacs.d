@@ -10,9 +10,9 @@
               (("C-x C-e" . js-send-last-sexp)
                ("C-M-x" . js-send-last-sexp-and-go)
                ("C-c C-b" . js-send-buffer-and-go)
-               ("C-c C-l" . js-load-file-and-go)))
-  :mode
-  ("\\.js$" . js2-mode)
+               ("C-c C-l" . js-load-file-and-go)
+               ("C-c f" . vs/format-standardjs-buffer)))
+  :mode ("\\.js$" . js2-mode)
   :config
   (custom-set-variables '(js2-mode-show-parse-errors nil))
   (custom-set-variables '(js2-mode-show-strict-warnings nil))
@@ -50,25 +50,25 @@
 
 ;; tern :- IDE like features for javascript and completion
 ;; http://ternjs.net/doc/manual.html#emacs
-(use-package tern
-  :defer t
-  :delight
-  :if (executable-find "tern")
-  :hook (js2-mode . tern-mode)
-  :config
-  (add-to-list 'tern-command "--no-port-file" 'append)
-  (define-key tern-mode-keymap (kbd "M-.") nil)
-  (define-key tern-mode-keymap (kbd "M-,") nil))
+;; (use-package tern
+;;   :defer t
+;;   :delight
+;;   :if (executable-find "tern")
+;;   :hook (js2-mode . tern-mode)
+;;   :config
+;;   (add-to-list 'tern-command "--no-port-file" 'append)
+;;   (define-key tern-mode-keymap (kbd "M-.") nil)
+;;   (define-key tern-mode-keymap (kbd "M-,") nil))
 
 ;; company backend for tern
 ;; http://ternjs.net/doc/manual.html#emacs
-(use-package company-tern
-  :defer t
-  :after tern
-  :if (executable-find "tern")
-  :init (add-to-list 'company-backends 'company-tern)
-  :config
-  (setq company-tooltip-align-annotations t))
+;; (use-package company-tern
+;;   :defer t
+;;   :after tern
+;;   :if (executable-find "tern")
+;;   :init (add-to-list 'company-backends 'company-tern)
+;;   :config
+;;   (setq company-tooltip-align-annotations t))
 
 (use-package rjsx-mode
   :mode
@@ -87,20 +87,27 @@
               ("C-c C-l" . indium-eval-buffer))
   :config (delight indium-interaction-mode))
 
+
 ;; typescript mode
 ;; https://github.com/ananthakumaran/tide
-(use-package tide
-  :mode (("\\.ts\\'" . typescript-mode))
-  :config
+(defun setup-tide-mode ()
+  "Setup tide mode."
+  (interactive)
+  (tide-setup)
   (setq company-tooltip-align-annotations t)
-  ;; formats the buffer before saving
-  (add-hook 'before-save-hook 'tide-format-before-save)
-  (add-hook 'typescript-mode-hook
-	    '(lambda ()
-	       "Setup typscript mode."
-	       (interactive)
-	       (setq flycheck-check-syntax-automatically '(save mode-enabled))
-	       (tide-hl-identifier-mode +1))))
+  (tide-hl-identifier-mode +1))
+
+(use-package tide
+  :ensure t
+  :mode ("\\.ts\\'" . typescript-mode)
+  :after (typescript-mode company flycheck)
+  :bind (:map tide-mode-map
+              ("C-c C-d" . tide-jsdoc-template)
+              ("C-c t f" . tide-organize-imports))
+  :hook ((typescript-mode . setup-tide-mode)
+         (typescript-mode . tide-hl-identifier-mode)))
+
+(add-hook 'js2-mode-hook #'setup-tide-mode)
 
 (provide 'lang-javascript)
 ;;; lang-javascript ends here

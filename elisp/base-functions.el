@@ -50,5 +50,13 @@
       (setq-local flycheck-javascript-eslint-executable eslint))))
 (add-hook 'flycheck-mode-hook #'vs/use-eslint-from-node-modules)
 
+(defun vs/format-standardjs-buffer ()
+  "Formart js buffer according standardjs."
+  (interactive)
+  (let ((buff (buffer-string)) (current-point (point)))
+    (erase-buffer)
+    (insert (shell-command-to-string (format "printf \"%s\" | standard --stdin --fix" buff)))
+    (goto-char current-point)))
+
 (provide 'base-functions)
 ;;; base-functions ends here

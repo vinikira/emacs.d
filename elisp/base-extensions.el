@@ -36,6 +36,11 @@
                           (projects . 5)
                           (agenda . 5))))
 
+(use-package dockerfile-mode
+  :mode ("\\Dockerfile$" . dockerfile-mode))
+
+(use-package docker-compose-mode)
+
 (use-package ediff
   :defer t
   :config
@@ -45,26 +50,23 @@
 
 (use-package editorconfig
   :delight
-  :defer t
   :config
   (editorconfig-mode 1))
 
 (use-package exec-path-from-shell
   :config
   ;; Add GOPATH to shell
-  (when (memq window-system '(mac ns))
+  (when (memq window-system '(mac ns x))
     (exec-path-from-shell-copy-env "GOPATH")
     (exec-path-from-shell-copy-env "PYTHONPATH")
     (exec-path-from-shell-initialize)))
 
 (use-package expand-region
-  :defer t
   :bind
   ("C-c e r" . er/expand-region)
   ("C-c e p" . er/mark-inside-pairs))
 
 (use-package flycheck
-  :defer t
   :delight
   :init
   (setq flycheck-javascript-eslint-executable "eslint_d")
@@ -95,7 +97,6 @@
   (define-key read-expression-map (kbd "C-r") 'counsel-expression-history))
 
 (use-package magit
-  :defer t
   :if (executable-find "git")
   :config
   (setq magit-completing-read-function 'ivy-completing-read)
@@ -122,7 +123,6 @@
   ("C-c C-f" . markdownfmt-format-buffer))
 
 (use-package multiple-cursors
-  :defer t
   :bind
   ("C-S-c C-S-c" . mc/edit-lines)
   ("C->" . mc/mark-next-like-this)
@@ -190,8 +190,9 @@
   (setq neo-theme 'arrows)
   :bind
   (:map global-map
-        ([f8]        . neotree-toggle)
-        ([f2]       . neotree-projectile-action)))
+        ([f8] . neotree-toggle)
+        ([f2] . neotree-projectile-action)
+        ([f7] . neotree-find)))
 
 (use-package try
   :defer t)
@@ -222,6 +223,12 @@
   :delight
   :config (smartparens-global-mode))
 
+;; Commando history
+(use-package smex)
+
+(use-package toml-mode
+  :mode ("\\.toml$" . toml-mode))
+
 (use-package undo-tree
   :delight
   :config
@@ -233,7 +240,6 @@
 
 (use-package which-key
   :delight
-  :defer t
   :config
   (which-key-mode))
 
@@ -245,16 +251,13 @@
   ("C-x <right>" . windmove-right))
 
 (use-package wgrep
-  :defer t
   :if (executable-find "grep"))
 
 (use-package xclip
-  :defer t
   :if (executable-find "xclip")
   :init (xclip-mode))
 
 (use-package yasnippet
-  :defer t
   :delight
   :init (setq yas-snippet-dirs
               '("~/.emacs.d/snippets/"))
@@ -263,8 +266,10 @@
 
 (use-package yasnippet-snippets
   :delight
-  :defer t
   :after (yas-global-mode))
+
+(use-package yaml-mode
+  :mode ("\\.yaml|.yml$" . yaml-mode))
 
 (provide 'base-extensions)
 ;;; base-extensions ends here
