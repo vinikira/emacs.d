@@ -7,8 +7,17 @@
 (use-package plantuml-mode
   :mode ("\\.plantuml\\'" . plantuml-mode)
   :config
-  (setq plantuml-jar-path "/opt/plantuml/plantuml.jar"
-	plantuml-output-type "svg"))
+  (let ((plantuml-directory "~/.emacs.d/private/")
+      (plantuml-link "https://superb-dca2.dl.sourceforge.net/project/plantuml/plantuml.jar"))
+  (let ((plantuml-target (concat plantuml-directory "plantuml.jar")))
+    (if (not (file-exists-p plantuml-target))
+        (progn (message "Downloading plantuml.jar")
+               (shell-command
+                (mapconcat 'identity (list "wget" plantuml-link "-O" plantuml-target) " "))
+               (kill-buffer "*Shell Command Output*")))
+    (setq org-plantuml-jar-path plantuml-target
+	  plantuml-jar-path plantuml-target
+	  plantuml-output-type "svg"))))
 
 ;; flycheck-plantuml
 ;; https://github.com/alexmurray/flycheck-plantuml

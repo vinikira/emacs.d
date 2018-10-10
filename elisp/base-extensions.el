@@ -29,6 +29,9 @@
   :config
   (add-hook 'after-init-hook 'company-quickhelp-mode))
 
+(use-package company-restclient
+  :config (add-to-list 'company-backends 'company-restclient))
+
 (use-package dashboard
   :config
   (dashboard-setup-startup-hook)
