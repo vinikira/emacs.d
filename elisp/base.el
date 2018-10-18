@@ -12,9 +12,10 @@
                                     gc-cons-percentage (car (get 'gc-cons-percentage 'standard-value)))))
 
 (package-initialize)
-(setq package-archives '(("melpa" . "https://melpa.org/packages/")
-                         ("elpy" . "http://jorgenschaefer.github.io/packages/")
-                         ("org" . "http://orgmode.org/elpa/")))
+(setq package-archives (append package-archives
+			       '(("melpa" . "https://melpa.org/packages/")
+			       ("elpy" . "http://jorgenschaefer.github.io/packages/")
+			       ("org" . "http://orgmode.org/elpa/"))))
 
 (when (not package-archive-contents)
   (package-refresh-contents))
