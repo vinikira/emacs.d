@@ -53,10 +53,8 @@
 (defun vs/format-standardjs-buffer ()
   "Formart js buffer according standardjs."
   (interactive)
-  (let ((buff (buffer-string)) (current-point (point)))
-    (erase-buffer)
-    (insert (shell-command-to-string (format "printf \"%s\" | standard --stdin --fix" buff)))
-    (goto-char current-point)))
+  (save-buffer)
+  (shell-command (format "standard --fix %s" (buffer-file-name))))
 
 (provide 'base-functions)
 ;;; base-functions ends here
