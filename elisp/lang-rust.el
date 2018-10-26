@@ -6,7 +6,8 @@
 ;; https://github.com/rust-lang/rust-mode
 (use-package rust-mode
   :ensure t
-  :config  (setq rust-format-on-save t))
+  :config  (setq rust-format-on-save t
+                 company-tooltip-align-annotations t))
 
 ;; add flycheck support for rust
 ;; https://github.com/flycheck/flycheck-rust

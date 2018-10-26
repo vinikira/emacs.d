@@ -17,6 +17,10 @@
   :bind
   ("C-c SPC" . avy-goto-char))
 
+(use-package all-the-icons
+  :config (when (memq window-system '(ns))
+            (setq inhibit-compacting-font-caches t)))
+
 (use-package company
   :delight
   :config
@@ -190,7 +194,7 @@
 (use-package neotree
   :config
   (setq-default treemacs-git-mode t)
-  (setq neo-theme 'arrows)
+  (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
   :bind
   (:map global-map
         ([f8] . neotree-toggle)
