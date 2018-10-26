@@ -131,7 +131,7 @@
 
 ;; linum only prog and text mode
 (defun vs/line-numbers ()
-  "Display line numbers"
+  "Display line numbers."
   (if (fboundp 'global-display-line-numbers-mode)
   (funcall (lambda ()
     (display-line-numbers-mode 1)

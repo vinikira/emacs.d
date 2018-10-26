@@ -191,14 +191,33 @@
   projectile-completion-system 'ivy)
   (projectile-mode))
 
+(defun vs/neotree-project-dir ()
+  "Open NeoTree using the git root."
+  (interactive)
+  (let ((project-dir (projectile-project-root))
+        (file-name (buffer-file-name)))
+    (neotree-toggle)
+    (if project-dir
+        (if (neo-global--window-exists-p)
+            (progn
+              (neotree-dir project-dir)
+              (neotree-find file-name)))
+      (message "Could not find git project root."))))
+
 (use-package neotree
-  :defer 5
   :init
-  (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
+  (setq neo-theme (if (display-graphic-p) 'icons 'arrow)
+	neo-show-hidden-files t
+	neo-smart-open t
+	neo-confirm-delete-directory-recursively t
+        neo-confirm-delete-file t
+	neo-vc-integration '(face char)
+	neo-auto-indent-point t
+	)
   :bind
   (:map global-map
         ([f8] . neotree-toggle)
-        ([f2] . neotree-projectile-action)
+        ([f2] . vs/neotree-project-dir)
         ([f7] . neotree-find)))
 
 (use-package try
