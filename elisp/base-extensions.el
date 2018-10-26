@@ -192,8 +192,8 @@
   (projectile-mode))
 
 (use-package neotree
-  :config
-  (setq-default treemacs-git-mode t)
+  :defer 5
+  :init
   (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
   :bind
   (:map global-map

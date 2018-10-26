@@ -111,11 +111,6 @@
 ;; Default modes
 (global-auto-revert-mode t)
 (show-paren-mode 1)
-(if (fboundp 'global-display-line-numbers-mode)
-  (funcall (lambda ()
-    (global-display-line-numbers-mode)
-    (global-hl-line-mode)))
-  (global-linum-mode))
 
 ;; Delight default modes
 (when (fboundp 'delight)
@@ -133,6 +128,18 @@
   (scroll-bar-mode -1))
 
 ;; Hooks
+
+;; linum only prog and text mode
+(defun vs/line-numbers ()
+  "Display line numbers"
+  (if (fboundp 'global-display-line-numbers-mode)
+  (funcall (lambda ()
+    (display-line-numbers-mode 1)
+    (hl-line-mode 1)))
+  (linum-mode 1)))
+
+(add-hook 'prog-mode-hook 'vs/line-numbers)
+(add-hook 'text-mode-hook 'vs/line-numbers)
 
 ;; Delete trailing whitespace before save
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
