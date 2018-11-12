@@ -191,22 +191,9 @@
   projectile-completion-system 'ivy)
   (projectile-mode))
 
-(defun vs/neotree-project-dir ()
-  "Open NeoTree using the git root."
-  (interactive)
-  (let ((project-dir (projectile-project-root))
-        (file-name (buffer-file-name)))
-    (neotree-toggle)
-    (if project-dir
-        (if (neo-global--window-exists-p)
-            (progn
-              (neotree-dir project-dir)
-              (neotree-find file-name)))
-      (message "Could not find git project root."))))
-
 (use-package neotree
   :init
-  (setq neo-theme (if (display-graphic-p) 'icons 'arrow)
+  (setq neo-theme (if (display-graphic-p) 'nerd) ;; change to icon when the issue https://github.com/jaypei/emacs-neotree/issues/307 is solved
 	neo-show-hidden-files t
 	neo-smart-open t
 	neo-confirm-delete-directory-recursively t
@@ -217,7 +204,6 @@
   :bind
   (:map global-map
         ([f8] . neotree-toggle)
-        ([f2] . vs/neotree-project-dir)
         ([f7] . neotree-find)))
 
 (use-package try
