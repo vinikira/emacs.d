@@ -18,7 +18,8 @@
   :hook ((js-mode . js2-minor-mode)
 	 (js2-mode . setup-tide-mode)
 	 (js2-mode . company-mode)
-	 (js2-mode . prettify-symbols-mode))
+	 (js2-mode . prettify-symbols-mode)
+         (js2-mode . js2-imenu-extras-mode))
   :interpreter (("node" . js2-mode)
 		("node" . js2-jsx-mode))
   :bind (:map js2-mode-map
@@ -29,9 +30,9 @@
                ("C-c f" . vs/format-standardjs-buffer)))
   :mode ("\\.js$" . js2-mode)
   :config
-  (custom-set-variables '(js2-mode-show-parse-errors nil))
-  (custom-set-variables '(js2-mode-show-strict-warnings nil))
-  (add-hook 'js2-mode-hook #'js2-imenu-extras-mode)
+  (custom-set-variables '(js2-mode-show-parse-errors nil)
+                        '(js2-mode-show-strict-warnings nil)
+                        '(js2-bounce-indent-p t))
   (setq js2-include-node-externs t
 	js2-highlight-level 3
 	js2-strict-missing-semi-warning nil)
