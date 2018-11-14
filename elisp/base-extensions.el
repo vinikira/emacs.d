@@ -193,7 +193,7 @@
 
 (use-package neotree
   :init
-  (setq neo-theme (if (display-graphic-p) 'nerd) ;; change to icon when the issue https://github.com/jaypei/emacs-neotree/issues/307 is solved
+  (setq neo-theme (if (display-graphic-p) 'icons)
 	neo-show-hidden-files t
 	neo-smart-open t
 	neo-confirm-delete-directory-recursively t
