@@ -28,6 +28,11 @@
   (setq-default company-dabbrev-downcase 0)
   (setq company-idle-delay 0))
 
+(use-package company-lsp
+  :delight
+  :config (setq company-lsp-async t
+                company-lsp-enable-snippet t))
+
 (use-package company-quickhelp
   :if (fboundp 'company)
   :config
@@ -102,6 +107,8 @@
   (ivy-mode 1)
   (setq ivy-use-virtual-buffers nil)
   (define-key read-expression-map (kbd "C-r") 'counsel-expression-history))
+
+(use-package lsp-mode)
 
 (use-package magit
   :if (executable-find "git")
