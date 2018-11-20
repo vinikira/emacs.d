@@ -19,7 +19,6 @@
 ;; rust language server protocol for emacs
 ;; https://github.com/emacs-lsp/lsp-rust
 (use-package lsp-rust
-  :after (lsp-mode)
   :config (setq lsp-rust-rls-command '("rustup" "run" "nightly" "rls"))
   (push 'company-lsp company-backends))
 
