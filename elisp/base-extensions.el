@@ -108,7 +108,12 @@
   (setq ivy-use-virtual-buffers nil)
   (define-key read-expression-map (kbd "C-r") 'counsel-expression-history))
 
-(use-package lsp-mode)
+(use-package lsp-mode
+  :hook ((lsp-mode . lsp-ui-mode)))
+
+;; LSP UI
+;; https://github.com/emacs-lsp/lsp-ui
+(use-package lsp-ui)
 
 (use-package magit
   :if (executable-find "git")
