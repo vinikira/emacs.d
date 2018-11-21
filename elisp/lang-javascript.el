@@ -38,7 +38,8 @@
                ("C-M-x" . js-send-last-sexp-and-go)
                ("C-c C-b" . js-send-buffer-and-go)
                ("C-c C-l" . js-load-file-and-go)
-               ("C-c f" . vs/format-standardjs-buffer)))
+               ("C-c f b" . vs/format-standardjs-buffer)
+               ("C-c f w s" . lsp-ui-peek-find-workspace-symbol)))
   :mode ("\\.js$" . js2-mode)
   :config
   (custom-set-variables '(js2-mode-show-parse-errors nil)
