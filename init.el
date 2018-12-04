@@ -4,6 +4,7 @@
 
 ;;; Code:
 
+(setq gc-cons-threshold 100000000)
 
 ;; Added by Package.el.  This must come before configurations of
 ;; installed packages.  Don't delete this line.  If you don't want it,
@@ -26,4 +27,6 @@
 (require 'lang-clojure)
 (require 'lang-plantuml)
 (require 'lang-rust)
+(require 'lang-config)
+
 ;;; init.el ends here

@@ -48,11 +48,6 @@
                           (projects . 5)
                           (agenda . 5))))
 
-(use-package dockerfile-mode
-  :mode ("\\Dockerfile$" . dockerfile-mode))
-
-(use-package docker-compose-mode)
-
 (use-package ediff
   :defer t
   :config
@@ -83,6 +78,11 @@
   :init
   (setq flycheck-javascript-eslint-executable "eslint_d")
   (global-flycheck-mode 1))
+
+(use-package git-gutter-fringe
+  :ensure t
+  :diminish git-gutter-mode
+  :config (global-git-gutter-mode))
 
 (use-package counsel
   :bind
@@ -153,7 +153,7 @@
   (setq org-directory (if (file-directory-p "~/Dropbox/org-files")
  			  "~/Dropbox/org-files"
  			"~/")
-	org-default-notes-file (concat org-directory "/todo.org")
+	org-default-notes-file (concat org-directory "/notes.org")
         org-agenda-files (list org-directory)
         org-src-fontify-natively t
         org-log-done 'time
@@ -189,8 +189,6 @@
 
 (use-package ox-reveal)
 
-(use-package page-break-lines)
-
 (use-package telephone-line
   :config
   (telephone-line-mode))
@@ -205,7 +203,7 @@
 
 (use-package neotree
   :init
-  (setq neo-theme (if (display-graphic-p) 'icons)
+  (setq neo-theme (if (display-graphic-p) 'icons 'nerd)
 	neo-show-hidden-files t
 	neo-smart-open t
 	neo-confirm-delete-directory-recursively t
@@ -226,6 +224,9 @@
   :config
   (setq twittering-icon-mode t
 	twittering-use-master-password t))
+
+(use-package rainbow-delimiters
+  :hook (prog-mode . rainbow-delimiters-mode))
 
 (use-package recentf
   :config
@@ -249,9 +250,6 @@
 
 ;; Commando history
 (use-package smex)
-
-(use-package toml-mode
-  :mode ("\\.toml$" . toml-mode))
 
 (use-package undo-tree
   :delight
@@ -279,7 +277,7 @@
 
 (use-package xclip
   :if (executable-find "xclip")
-  :init (xclip-mode))
+  :config (xclip-mode))
 
 (use-package yasnippet
   :delight
@@ -291,9 +289,6 @@
 (use-package yasnippet-snippets
   :delight
   :after (yas-global-mode))
-
-(use-package yaml-mode
-  :mode ("\\.yaml|.yml$" . yaml-mode))
 
 (provide 'base-extensions)
 ;;; base-extensions ends here
