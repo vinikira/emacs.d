@@ -13,5 +13,5 @@
 (use-package toml-mode
   :mode ("\\.toml$" . toml-mode))
 
-(provide 'base-extensions)
+(provide 'lang-config)
 ;;; base-extensions ends here
