@@ -154,7 +154,9 @@
  			  "~/Dropbox/org-files"
  			"~/")
 	org-default-notes-file (concat org-directory "/notes.org")
-        org-agenda-files (list org-directory)
+        org-agenda-files (list (concat org-directory "/work.org")
+                             (concat org-directory "/school.org")
+                             (concat org-directory "/home.org"))
         org-src-fontify-natively t
         org-log-done 'time
         org-capture-templates
