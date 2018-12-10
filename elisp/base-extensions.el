@@ -144,9 +144,11 @@
 (use-package multiple-cursors
   :bind
   ("C-S-c C-S-c" . mc/edit-lines)
-  ("C->" . mc/mark-next-like-this)
-  ("C-<" . mc/mark-previous-like-this)
-  ("C-c C->" . mc/mark-all-like-this))
+  ("M-n" . mc/mark-next-like-this)
+  ("M-p" . mc/mark-previous-like-this)
+  ("C-c x" . mc/mark-all-like-this))
+
+(use-package ob-restclient)
 
 (use-package org
   :config
@@ -159,6 +161,7 @@
                              (concat org-directory "/home.org"))
         org-src-fontify-natively t
         org-log-done 'time
+        org-babel-sh-command "bash"
         org-capture-templates
         '(("t" "todo" entry (file org-default-notes-file)
            "* TODO %?\n%u\n%a\n" :clock-in t :clock-resume t)
@@ -169,7 +172,14 @@
           ("i" "Idea" entry (file org-default-notes-file)
            "* %? :IDEA: \n%t" :clock-in t :clock-resume t)
           ("n" "Next Task" entry (file+headline org-default-notes-file "Tasks")
-           "** NEXT %? \nDEADLINE: %t") ))
+           "** NEXT %? \nDEADLINE: %t")))
+  (org-babel-do-load-languages 'org-babel-load-languages
+                             (append org-babel-load-languages
+                              '((python . t)
+                                (restclient . t)
+                                (js . t)
+                                (sh . t)
+                                (plantuml . t))))
   :bind
   ("C-c l" . org-store-link)
   ("C-c a" . org-agenda))

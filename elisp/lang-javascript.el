@@ -26,7 +26,7 @@
   :delight "ES"
   :hook ((js-mode . js2-minor-mode)
 ;;	 (js2-mode . lsp-javascript-typescript-enable)
-;;         (js2-mode . fix-lsp-comp-hook)
+;;       (js2-mode . fix-lsp-comp-hook)
 	 (js2-mode . company-mode)
 	 (js2-mode . prettify-symbols-mode)
          (js2-mode . js2-imenu-extras-mode)

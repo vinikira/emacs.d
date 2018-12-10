@@ -2,6 +2,6 @@
 # name: src
 # key: src
 # --
-#+begin_src ${1:lang} :results code
+#+BEGIN_SRC ${1:lang} :async :results code
 $0
-#+end_src
+#+END_SRC

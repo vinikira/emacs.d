@@ -102,11 +102,11 @@
 (defun vs/load-frame-font (frame)
 	  "FRAME."
 	  (select-frame frame)
-	  (vs/set-font "Hack" 10))
+	  (vs/set-font "Hack Nerd Font" 10))
 
 (if (daemonp)
       (add-hook 'after-make-frame-functions #'vs/load-frame-font)
-    (vs/set-font "Hack" 10))
+    (vs/set-font "Hack Nerd Font" 10))
 
 ;; Default modes
 (global-auto-revert-mode t)
