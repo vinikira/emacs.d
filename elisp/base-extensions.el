@@ -2,8 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-(use-package delight)
-
 (use-package ace-window
   :init
   (progn
@@ -47,6 +45,8 @@
   (setq dashboard-items '((recents  . 5)
                           (projects . 5)
                           (agenda . 5))))
+
+(use-package delight)
 
 (use-package ediff
   :defer t
@@ -150,6 +150,9 @@
 
 (use-package ob-restclient)
 
+(use-package ob-async
+  :config (setq ob-async-no-async-languages-alist '("ipython")))
+
 (use-package org
   :config
   (setq org-directory (if (file-directory-p "~/Dropbox/org-files")
@@ -159,6 +162,7 @@
         org-agenda-files (list (concat org-directory "/work.org")
                              (concat org-directory "/school.org")
                              (concat org-directory "/home.org"))
+        org-confirm-babel-evaluate nil
         org-src-fontify-natively t
         org-log-done 'time
         org-babel-sh-command "bash"
@@ -173,13 +177,16 @@
            "* %? :IDEA: \n%t" :clock-in t :clock-resume t)
           ("n" "Next Task" entry (file+headline org-default-notes-file "Tasks")
            "** NEXT %? \nDEADLINE: %t")))
-  (org-babel-do-load-languages 'org-babel-load-languages
-                             (append org-babel-load-languages
-                              '((python . t)
-                                (restclient . t)
-                                (js . t)
-                                (sh . t)
-                                (plantuml . t))))
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   (append org-babel-load-languages
+	   '((emacs-lisp . t)
+	     (python . t)
+	     (restclient . t)
+	     (js . t)
+	     (shell . t)
+	     (plantuml . t)
+	     (sql . t))))
   :bind
   ("C-c l" . org-store-link)
   ("C-c a" . org-agenda))

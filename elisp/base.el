@@ -79,7 +79,10 @@
       scroll-preserve-screen-position    nil
 
       ;; disable line wrap
-      truncate-lines                     t)
+      truncate-lines                     t
+
+      ;; more memory
+      gc-cons-threshold                  20000000)
 
 
 (setq-default  use-package-always-ensure t
@@ -92,6 +95,9 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 
 ;; Font
+(defvar font-name "Hack Nerd Font")
+(defvar font-size 10)
+
 (defun vs/set-font (font-name size)
   "Set frame font and SIZE if they is installed in system using FONT-NAME."
   (when (member font-name (font-family-list))
@@ -99,33 +105,28 @@
     (set-face-attribute 'default nil :font (format "%s-%d" font-name size))
     (set-frame-font (format "%s-%d" font-name size) nil t)))
 
-(defun vs/load-frame-font (frame)
-	  "FRAME."
-	  (select-frame frame)
-	  (vs/set-font "Hack Nerd Font" 10))
-
 (if (daemonp)
-      (add-hook 'after-make-frame-functions #'vs/load-frame-font)
-    (vs/set-font "Hack Nerd Font" 10))
+    (add-hook 'after-make-frame-functions (lambda (frame)
+                                            (select-frame frame)
+	                                    (vs/set-font font-name font-size)))
+    (vs/set-font font-name font-size))
 
-;; Default modes
-(global-auto-revert-mode t)
-(show-paren-mode 1)
+;; Enable modes
+(mapc (lambda (it) (funcall it 1))
+      '(global-auto-revert-mode
+	  show-paren-mode))
 
-;; Delight default modes
-(when (fboundp 'delight)
-  (funcall (lambda ()
-    (require 'delight)
-    (delight '((auto-revert-mode)
-	       (page-break-lines-mode)
-	       (eldoc-mode))))))
+;; Disable modes
+(mapc (lambda (it) (funcall it -1))
+      '(menu-bar-mode
+	tool-bar-mode
+	scroll-bar-mode))
 
-;; Disable toolbar & menubar
-(menu-bar-mode -1)
-(when (fboundp 'tool-bar-mode)
-  (tool-bar-mode -1))
-(when (fboundp 'scroll-bar-mode)
-  (scroll-bar-mode -1))
+;; Delight modes
+(mapc (lambda (it) (funcall 'delight it))
+      '(auto-revert-mode
+	page-break-lines-mode
+	eldoc-mode))
 
 ;; Hooks
 

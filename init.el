@@ -14,6 +14,8 @@
 
 (add-to-list 'load-path (concat user-emacs-directory "elisp"))
 
+(setq use-package-always-ensure t)
+
 (require 'base)
 (require 'base-theme)
 (require 'base-extensions)

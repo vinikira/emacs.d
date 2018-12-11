@@ -25,8 +25,8 @@
 (use-package js2-mode
   :delight "ES"
   :hook ((js-mode . js2-minor-mode)
-;;	 (js2-mode . lsp-javascript-typescript-enable)
-;;       (js2-mode . fix-lsp-comp-hook)
+	 (js2-mode . lsp-javascript-typescript-enable)
+	 (js2-mode . fix-lsp-comp-hook)
 	 (js2-mode . company-mode)
 	 (js2-mode . prettify-symbols-mode)
          (js2-mode . js2-imenu-extras-mode)
@@ -77,28 +77,6 @@
 (use-package json-mode
   :mode
   ("\\.json$" . json-mode))
-
-;; tern :- IDE like features for javascript and completion
-;; http://ternjs.net/doc/manual.html#emacs
-;; (use-package tern
-;;   :defer t
-;;   :delight
-;;   :if (executable-find "tern")
-;;   :hook (js2-mode . (lambda () (tern-mode t)))
-;;   :config
-;;   (add-to-list 'tern-command "--no-port-file" 'append)
-;;   (define-key tern-mode-keymap (kbd "M-.") nil)
-;;   (define-key tern-mode-keymap (kbd "M-,") nil))
-
-;; company backend for tern
-;; http://ternjs.net/doc/manual.html#emacs
-;; (use-package company-tern
-;;   :defer t
-;;   :after tern
-;;   :if (executable-find "tern")
-;;   :init (add-to-list 'company-backends 'company-tern)
-;;   :config
-;;   (setq company-tooltip-align-annotations t))
 
 (use-package lsp-javascript-typescript
   :config (push 'company-lsp company-backends))
