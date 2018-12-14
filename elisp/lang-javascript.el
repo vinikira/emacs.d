@@ -94,8 +94,10 @@
 (use-package indium
   :defer t
   :after js2-mode
-  :bind (:map js2-mode-map
-              ("C-c C-l" . indium-eval-buffer))
+  :bind (:map indium-interaction-mode-map
+              ("C-c C-l" . indium-eval-buffer)
+              ("C-c i q" . indium-quit)
+              ("C-c i c" . indium-connect))
   :config (delight indium-interaction-mode))
 
 (use-package tide
