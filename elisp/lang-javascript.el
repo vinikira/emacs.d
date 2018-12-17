@@ -2,31 +2,11 @@
 ;;; Commentary:
 ;;; Code:
 
-;; typescript mode
-;; https://github.com/ananthakumaran/tide
-(defun setup-tide-mode ()
-  "Setup tide mode."
-  (interactive)
-  (tide-setup)
-  (setq-default company-tooltip-align-annotations t)
-  (tide-hl-identifier-mode +1))
-
-
-(defun my-company-transformer (candidates)
-  (let ((completion-ignore-case t))
-    (all-completions (company-grab-symbol) candidates)))
-
-(defun fix-lsp-comp-hook nil
-  (make-local-variable 'company-transformers)
-  (push 'my-company-transformer company-transformers))
-
 ;; js2-mode
 ;; https://github.com/mooz/js2-mode
 (use-package js2-mode
   :delight "ES"
   :hook ((js-mode . js2-minor-mode)
-	 (js2-mode . lsp-javascript-typescript-enable)
-	 (js2-mode . fix-lsp-comp-hook)
 	 (js2-mode . company-mode)
 	 (js2-mode . prettify-symbols-mode)
          (js2-mode . js2-imenu-extras-mode)
@@ -34,11 +14,7 @@
   :interpreter (("node" . js2-mode)
 		("node" . js2-jsx-mode))
   :bind (:map js2-mode-map
-              (("C-x C-e" . js-send-last-sexp)
-               ("C-M-x" . js-send-last-sexp-and-go)
-               ("C-c C-b" . js-send-buffer-and-go)
-               ("C-c C-l" . js-load-file-and-go)
-               ("C-c f b" . vs/format-standardjs-buffer)
+              (("C-c f b" . vs/format-standardjs-buffer)
                ("C-c f w s" . lsp-ui-peek-find-workspace-symbol)))
   :mode ("\\.js$" . js2-mode)
   :config
@@ -78,7 +54,18 @@
   :mode
   ("\\.json$" . json-mode))
 
+
+;; (defun my-company-transformer (candidates)
+;;   (let ((completion-ignore-case t))
+;;     (all-completions (company-grab-symbol) candidates)))
+
+;; (defun fix-lsp-comp-hook nil
+;;   (make-local-variable 'company-transformers)
+;;   (push 'my-company-transformer company-transformers))
+
 (use-package lsp-javascript-typescript
+  :hook ((js2-mode . lsp-javascript-typescript-enable)
+	 (js2-mode . fix-lsp-comp-hook))
   :config (push 'company-lsp company-backends))
 
 (use-package rjsx-mode
@@ -92,13 +79,22 @@
 ;; indium: javascript awesome development environment
 ;; https://github.com/NicolasPetton/indium
 (use-package indium
-  :defer t
   :after js2-mode
+  :hook ((js2-mode . indium-interaction-mode))
   :bind (:map indium-interaction-mode-map
-              ("C-c C-l" . indium-eval-buffer)
+              ("C-x C-e" . indium-eval-last-node)
               ("C-c i q" . indium-quit)
               ("C-c i c" . indium-connect))
   :config (delight indium-interaction-mode))
+
+;; typescript mode
+;; https://github.com/ananthakumaran/tide
+(defun setup-tide-mode ()
+  "Setup tide mode."
+  (interactive)
+  (tide-setup)
+  (setq-default company-tooltip-align-annotations t)
+  (tide-hl-identifier-mode +1))
 
 (use-package tide
   :ensure t

@@ -103,6 +103,7 @@
   :bind
   ("C-x s" . swiper)
   ("C-x C-r" . ivy-resume)
+  ("C-x b" . ivy-switch-buffer)
   :config
   (ivy-mode 1)
   (setq ivy-use-virtual-buffers nil)
@@ -214,11 +215,14 @@
 
 (use-package projectile
   :delight '(:eval (concat " [" (projectile-project-name) "]"))
+  :bind (("C-c p s p" . projectile-switch-project)
+         ("C-c p f f" . projectile-switch-project))
   :config
   (setq projectile-known-projects-file
         (expand-file-name "projectile-bookmarks.eld" temp-dir)
-  projectile-completion-system 'ivy)
-  (projectile-mode))
+        projectile-completion-system 'ivy
+        projectile-globally-ignored-directories '("node_modules"))
+  (projectile-global-mode))
 
 (use-package neotree
   :init
