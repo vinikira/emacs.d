@@ -9,8 +9,7 @@
   :hook ((js-mode . js2-minor-mode)
 	 (js2-mode . company-mode)
 	 (js2-mode . prettify-symbols-mode)
-         (js2-mode . js2-imenu-extras-mode)
-         (js2-mode . js2-refactor-mode))
+         (js2-mode . js2-imenu-extras-mode))
   :interpreter (("node" . js2-mode)
 		("node" . js2-jsx-mode))
   :bind (:map js2-mode-map
@@ -37,6 +36,7 @@
 (use-package js2-refactor
   :delight
   :after (js2-mode)
+  :hook ((js2-mode . js2-refactor-mode))
   :config
   (js2r-add-keybindings-with-prefix "C-c j r")
   (define-key js2-mode-map (kbd "C-k") #'js2r-kill))
@@ -46,14 +46,14 @@
   :if (executable-find "ag")
   :after (js2-mode)
   :config
-  (add-hook 'js2-mode-hook
+  (define-key js2-mode-map (kbd "M-.") nil)
+  :hook ((js2-mode .
             (lambda ()
-              (add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t))))
+              (add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t)))))
 
 (use-package json-mode
   :mode
   ("\\.json$" . json-mode))
-
 
 ;; (defun my-company-transformer (candidates)
 ;;   (let ((completion-ignore-case t))
