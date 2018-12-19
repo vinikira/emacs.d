@@ -83,7 +83,10 @@
   :hook ((js2-mode . indium-interaction-mode))
   :bind (:map indium-interaction-mode-map
               ("C-x C-e" . indium-eval-last-node)
-              ("C-c i q" . indium-quit)
+              ("C-c i q" . (lambda ()
+                             (interactive)
+                             (indium-quit)
+                             (revert-buffer t t)))
               ("C-c i c" . indium-connect))
   :config (delight indium-interaction-mode))
 
