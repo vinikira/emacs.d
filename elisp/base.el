@@ -95,7 +95,7 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 
 ;; Font
-(defvar font-name "Hack Nerd Font")
+(defvar font-name "NotoSansMono Nerd Font")
 (defvar font-size 10)
 
 (defun vs/set-font (font-name size)
