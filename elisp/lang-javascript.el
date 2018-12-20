@@ -5,7 +5,7 @@
 ;; js2-mode
 ;; https://github.com/mooz/js2-mode
 (use-package js2-mode
-  :delight "ES"
+  :delight "EcmaScript"
   :hook ((js-mode . js2-minor-mode)
 	 (js2-mode . company-mode)
 	 (js2-mode . prettify-symbols-mode)

@@ -22,39 +22,72 @@
   (interactive)
   (mapc 'kill-buffer (buffer-list)))
 
-(defun vs/eslint-find-binary ()
-  (or
-   (let ((root (locate-dominating-file buffer-file-name "node_modules")))
-     (if root
-         (let ((eslint (concat root "node_modules/.bin/eslint")))
-           (if (file-executable-p eslint) eslint))))
-   (error "Couldn't find a eslint executable. Please run command: \"sudo npm i eslint --save-dev\"")))
-
-(defun vs/eslint-fix-file ()
-  "Format the current file with ESLint."
-  (interactive)
-  (progn (call-process
-          (eslint-find-binary)
-          nil nil nil
-          buffer-file-name "--fix")
-         (revert-buffer t t t)))
-
-(defun vs/use-eslint-from-node-modules ()
-  (let* ((root (locate-dominating-file
-                (or (buffer-file-name) default-directory)
-                "node_modules"))
-         (eslint (and root
-                      (expand-file-name "node_modules/.bin/eslint"
-                                        root))))
-    (when (and eslint (file-executable-p eslint))
-      (setq-local flycheck-javascript-eslint-executable eslint))))
-(add-hook 'flycheck-mode-hook #'vs/use-eslint-from-node-modules)
-
-(defun vs/format-standardjs-buffer ()
+(defun vs/format-standardjs-buffer (&optional begin end)
   "Formart js buffer according standardjs."
+  (interactive "r")
+  (when (executable-find "prettier-standard")
+    (let ((curr-point (point)))
+      (call-shell-region
+       (if (region-active-p) begin (point-min))
+       (if (region-active-p) end (point-max))
+       "prettier-standard"
+       t
+       (current-buffer))
+      (goto-char curr-point))))
+
+(defun vs/format-xml-buffer (&optional begin end)
+  "Format xml buffer using xmllint"
+  (interactive "r")
+  (when (executable-find "xmllint")
+    (let ((curr-point (point)))
+      (call-shell-region
+       (if (region-active-p) begin (point-min))
+       (if (region-active-p) end (point-max))
+       "xmllint --format -"
+       t
+       (current-buffer))
+      (goto-char curr-point))))
+
+(defun vs/generate-nodejs-project-config-files ()
+  "Generate indium generic config file for nodejs projects."
   (interactive)
-  (save-buffer)
-  (shell-command (format "standard --fix %s" (buffer-file-name))))
+  (when (string= major-mode "dired-mode")
+    (shell-command
+     (format "echo '{\"configurations\": [{\"name\": \"%s\",\"type\": \"%s\",\"command\": \"%s\"}]' > .indium.json"
+             (read-string "Enter indium project name:")
+             (read-string "Enter indium project type (node or chrome):")
+             (read-string "Enter indium command:")))))
+
+;; Scratch Buffers stuff
+
+(defun vs/generic-scratch-buffer (new-buffer-name mode &optional open-new-frame)
+  "Open generic scratch buffer"
+  (when open-new-frame
+    (select-frame
+     (new-frame)))
+  (switch-to-buffer
+   (get-buffer-create new-buffer-name))
+  (funcall mode))
+
+(defun vs/scratch-restclient (open-new-frame)
+  "Create a new restclient scratch buffer."
+  (interactive "P")
+  (vs/generic-scratch-buffer "*restclient-scratch*" 'restclient-mode open-new-frame))
+
+(defun vs/scratch-js (open-new-frame)
+  "Create a new javascript scratch buffer."
+  (interactive "P")
+  (vs/generic-scratch-buffer "*js-scratch*" 'js2-mode open-new-frame))
+
+(defun vs/scratch-json (open-new-frame)
+  "Create a new json scratch buffer."
+  (interactive "P")
+  (vs/generic-scratch-buffer "*json-scratch*" 'json-mode open-new-frame))
+
+(defun vs/scratch-xml (open-new-frame)
+  "Create a new xml scratch buffer."
+  (interactive "P")
+  (vs/generic-scratch-buffer "*xml-scratch*" 'xml-mode open-new-frame))
 
 (provide 'base-functions)
 ;;; base-functions ends here
