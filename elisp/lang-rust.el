@@ -16,7 +16,8 @@
 
 (use-package racer
   :after (rust-mode)
-  :hook ((rust-mode . racer-mode))
+  :hook ((rust-mode . racer-mode)
+	 (racer-mode . flycheck-rust-setup))
   :config
   (eldoc-mode 1)
   (define-key rust-mode-map (kbd "TAB") #'company-indent-or-complete-common)

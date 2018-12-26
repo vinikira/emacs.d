@@ -23,7 +23,7 @@
   (mapc 'kill-buffer (buffer-list)))
 
 (defun vs/format-standardjs-buffer (&optional begin end)
-  "Formart js buffer according standardjs."
+  "Formart js buffer according standardjs, BEGIN region and END region."
   (interactive "r")
   (when (executable-find "standard")
     (save-excursion
@@ -32,10 +32,14 @@
        (if (region-active-p) end (point-max))
        "standard --stdin --fix"
        t
-       (current-buffer)))))
+       (current-buffer)))
+    (save-excursion
+      (forward-line 1)
+      (when (and (search-forward "standard:") (not (beginning-of-line)))
+	(delete-region (point) (point-max))))))
 
 (defun vs/format-xml-buffer (&optional begin end)
-  "Format xml buffer using xmllint"
+  "Format xml buffer using xmllint, BEGIN region and END region."
   (interactive "r")
   (when (executable-find "xmllint")
     (let ((curr-point (point)))
