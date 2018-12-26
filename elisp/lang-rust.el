@@ -6,8 +6,6 @@
 ;; https://github.com/rust-lang/rust-mode
 (use-package rust-mode
   :ensure t
-  :hook ((rust-mode . lsp-mode)
-	 (rust-mode . lsp-rust-enable))
   :config  (setq rust-format-on-save t
                  company-tooltip-align-annotations t))
 
@@ -16,11 +14,22 @@
 (use-package cargo
   :hook (rust-mode . cargo-minor-mode))
 
+(use-package racer
+  :after (rust-mode)
+  :hook ((rust-mode . racer-mode))
+  :config
+  (eldoc-mode 1)
+  (define-key rust-mode-map (kbd "TAB") #'company-indent-or-complete-common)
+  (setq company-tooltip-align-annotations t))
+
 ;; rust language server protocol for emacs
 ;; https://github.com/emacs-lsp/lsp-rust
-(use-package lsp-rust
-  :config (setq lsp-rust-rls-command '("rustup" "run" "nightly" "rls"))
-  (push 'company-lsp company-backends))
+;; (use-package lsp-rust
+;;   :hook ((rust-mode . lsp-mode)
+;; 	 (rust-mode . lsp-rust-enable))
+;;   :config
+;;   (setq lsp-rust-rls-command '("rustup" "run" "stable" "rls"))
+;;   (push 'company-lsp company-backends))
 
 (provide 'lang-rust)
 ;;; lang-rust ends here
