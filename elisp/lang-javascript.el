@@ -55,19 +55,6 @@
   :mode
   ("\\.json$" . json-mode))
 
-;; (defun my-company-transformer (candidates)
-;;   (let ((completion-ignore-case t))
-;;     (all-completions (company-grab-symbol) candidates)))
-
-;; (defun fix-lsp-comp-hook nil
-;;   (make-local-variable 'company-transformers)
-;;   (push 'my-company-transformer company-transformers))
-
-(use-package lsp-javascript-typescript
-  :hook ((js2-mode . lsp-javascript-typescript-enable)
-	 (js2-mode . fix-lsp-comp-hook))
-  :config (push 'company-lsp company-backends))
-
 (use-package rjsx-mode
   :mode
   ("\\.jsx$" . rjsx-mode))

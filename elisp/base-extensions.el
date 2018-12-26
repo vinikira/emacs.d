@@ -28,6 +28,7 @@
 
 (use-package company-lsp
   :delight
+  :commands company-lsp
   :config (setq company-lsp-async t
                 company-lsp-enable-snippet t))
 
@@ -110,11 +111,14 @@
   (define-key read-expression-map (kbd "C-r") 'counsel-expression-history))
 
 (use-package lsp-mode
-  :hook ((lsp-mode . lsp-ui-mode)))
+  :commands lsp
+  :hook ((lsp-mode . lsp-ui-mode))
+  :config (push 'company-lsp company-backends))
 
 ;; LSP UI
 ;; https://github.com/emacs-lsp/lsp-ui
-(use-package lsp-ui)
+(use-package lsp-ui
+  :commands lsp-ui-mode)
 
 (use-package magit
   :if (executable-find "git")
@@ -188,6 +192,7 @@
 	     (shell . t)
 	     (plantuml . t)
 	     (sql . t))))
+  :hook (org-mode . (lambda () (display-line-numbers-mode -1)))
   :bind
   ("C-c l" . org-store-link)
   ("C-c a" . org-agenda))
@@ -201,11 +206,9 @@
 	org-agenda-files (append org-agenda-files (org-projectile-todo-files))))
 
 (use-package org-bullets
+  :hook ((org-mode . org-bullets-mode))
   :config
-  (setq org-hide-leading-stars t)
-  (add-hook 'org-mode-hook
-            (lambda ()
-              (org-bullets-mode t))))
+  (setq org-hide-leading-stars t))
 
 (use-package ox-reveal)
 

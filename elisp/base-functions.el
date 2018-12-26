@@ -25,15 +25,14 @@
 (defun vs/format-standardjs-buffer (&optional begin end)
   "Formart js buffer according standardjs."
   (interactive "r")
-  (when (executable-find "prettier-standard")
-    (let ((curr-point (point)))
+  (when (executable-find "standard")
+    (save-excursion
       (call-shell-region
        (if (region-active-p) begin (point-min))
        (if (region-active-p) end (point-max))
-       "prettier-standard"
+       "standard --stdin --fix"
        t
-       (current-buffer))
-      (goto-char curr-point))))
+       (current-buffer)))))
 
 (defun vs/format-xml-buffer (&optional begin end)
   "Format xml buffer using xmllint"
