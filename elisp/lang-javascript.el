@@ -74,7 +74,8 @@
                              (interactive)
                              (indium-quit)
                              (revert-buffer t t)))
-              ("C-c i c" . indium-connect))
+              ("C-c i c" . indium-connect)
+              ("C-c i l" . indium-launch))
   :config (delight indium-interaction-mode))
 
 ;; typescript mode
