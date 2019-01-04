@@ -234,9 +234,7 @@
 	neo-smart-open t
 	neo-confirm-delete-directory-recursively t
         neo-confirm-delete-file t
-	neo-vc-integration '(face char)
-	neo-auto-indent-point t
-	)
+	neo-auto-indent-point t)
   :bind
   (:map global-map
         ([f8] . neotree-toggle)

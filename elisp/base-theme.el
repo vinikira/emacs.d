@@ -2,17 +2,25 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun vs/load-theme (frame)
+(defun vs/config-doom-theme ()
+  (load-theme 'doom-dracula t)
+  (doom-themes-visual-bell-config)
+  (doom-themes-neotree-config)
+  (doom-themes-org-config))
+
+(defun vs/load-frame-theme (frame)
 	  "FRAME."
 	  (select-frame frame)
-	  (load-theme 'dracula t))
+	  (vs/config-doom-theme))
 
-(use-package dracula-theme
-  :ensure t
-  :init
+(use-package doom-themes
+  :init (setq doom-themes-enable-bold t
+              doom-themes-enable-italic t
+              doom-neotree-file-icons t)
+  :config
   (if (daemonp)
-      (add-hook 'after-make-frame-functions #'vs/load-theme)
-    (load-theme 'dracula t)))
+      (add-hook 'after-make-frame-functions #'vs/load-frame-theme)
+    (vs/config-doom-theme)))
 
 (provide 'base-theme)
 ;;; base-theme ends here
