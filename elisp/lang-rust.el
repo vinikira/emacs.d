@@ -14,23 +14,16 @@
 (use-package cargo
   :hook (rust-mode . cargo-minor-mode))
 
+;; racer mode
+;; https://github.com/racer-rust/emacs-racer
 (use-package racer
   :after (rust-mode)
   :hook ((rust-mode . racer-mode)
-	 (racer-mode . flycheck-rust-setup))
+	 (racer-mode . flycheck-rust-setup)
+	 (racer-mode . eldoc-mode))
   :config
-  (eldoc-mode 1)
   (define-key rust-mode-map (kbd "TAB") #'company-indent-or-complete-common)
   (setq company-tooltip-align-annotations t))
 
-;; rust language server protocol for emacs
-;; https://github.com/emacs-lsp/lsp-rust
-;; (use-package lsp-rust
-;;   :hook ((rust-mode . lsp-mode)
-;; 	 (rust-mode . lsp-rust-enable))
-;;   :config
-;;   (setq lsp-rust-rls-command '("rustup" "run" "stable" "rls"))
-;;   (push 'company-lsp company-backends))
-
 (provide 'lang-rust)
-;;; lang-rust ends here
+;;; lang-rust ends here.

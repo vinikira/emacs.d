@@ -14,6 +14,7 @@
 	  (vs/config-doom-theme))
 
 (use-package doom-themes
+  :ensure t
   :init (setq doom-themes-enable-bold t
               doom-themes-enable-italic t
               doom-neotree-file-icons t)
