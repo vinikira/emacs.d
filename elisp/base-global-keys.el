@@ -7,6 +7,8 @@
 (global-set-key (kbd "C-x 2") 'vs/split-window-below-and-switch)
 (global-set-key (kbd "C-x 3") 'vs/split-window-right-and-switch)
 
+(global-set-key (kbd "C-x C-b") 'ibuffer)
+
 ;; Scratch buffers stuff
 (global-set-key (kbd "C-c s b r") 'vs/scratch-restclient)
 (global-set-key (kbd "C-c s b e") 'vs/scratch-js)
