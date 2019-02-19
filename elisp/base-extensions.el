@@ -218,7 +218,9 @@
 
 (use-package projectile
   :delight '(:eval (concat " [" (projectile-project-name) "]"))
-  :bind (("C-c p s p" . projectile-switch-project))
+  :bind (("C-c p s p" . projectile-switch-project)
+         ("C-c p c p" . projectile-kill-buffers)
+         ("C-c p v c" . projectile-vc))
   :config
   (setq projectile-known-projects-file
         (expand-file-name "projectile-bookmarks.eld" temp-dir)
