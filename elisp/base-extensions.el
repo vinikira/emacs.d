@@ -218,14 +218,16 @@
 
 (use-package projectile
   :delight '(:eval (concat " [" (projectile-project-name) "]"))
-  :bind (("C-c p s p" . projectile-switch-project)
-         ("C-c p f f" . projectile-switch-project))
+  :bind (("C-c p s p" . projectile-switch-project))
   :config
   (setq projectile-known-projects-file
         (expand-file-name "projectile-bookmarks.eld" temp-dir)
         projectile-completion-system 'ivy
         projectile-globally-ignored-directories '("node_modules"))
   (projectile-global-mode))
+
+(use-package projectile-ripgrep
+  :bind (("C-c p s f" . projectile-ripgrep)))
 
 (use-package neotree
   :init
