@@ -4,8 +4,6 @@
 
 ;;; Code:
 
-(setq gc-cons-threshold 100000000)
-
 ;; Added by Package.el.  This must come before configurations of
 ;; installed packages.  Don't delete this line.  If you don't want it,
 ;; just comment it out by adding a semicolon to the start of the line.
@@ -30,5 +28,6 @@
 (require 'lang-plantuml)
 (require 'lang-rust)
 (require 'lang-config)
+(require 'lang-java)
 
 ;;; init.el ends here

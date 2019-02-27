@@ -1,5 +1,6 @@
 ;;; lang-config.el --- Lang config file
-;;; Commentary: Lang for config type files
+;;; Commentary:
+;;; Lang for config type files
 ;;; Code:
 
 (use-package yaml-mode
@@ -13,5 +14,7 @@
 (use-package toml-mode
   :mode ("\\.toml$" . toml-mode))
 
+(use-package nginx-mode)
+
 (provide 'lang-config)
-;;; base-extensions ends here
+;;; lang-config.el ends here

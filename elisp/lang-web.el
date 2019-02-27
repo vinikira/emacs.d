@@ -16,16 +16,13 @@
    ("\\.mustache\\'" . web-mode)
    ("\\.djhtml\\'" . web-mode)
    ("\\.jsx$" . web-mode))
+  :hook ((web-mode . company-mode)
+	 (web-mode . jsx-flycheck))
+  :init   (setq web-mode-markup-indent-offset 2
+		 web-mode-css-indent-offset 2
+		 web-mode-code-indent-offset 2
+		 web-mode-enable-current-element-highlight t)
   :config
-  (setq web-mode-markup-indent-offset 2
-        web-mode-css-indent-offset 2
-        web-mode-code-indent-offset 2)
-
-  (add-hook 'web-mode-hook 'jsx-flycheck)
-
-  ;; highlight enclosing tags of the element under cursor
-  (setq web-mode-enable-current-element-highlight t)
-
   (defadvice web-mode-highlight-part (around tweak-jsx activate)
     (if (equal web-mode-content-type "jsx")
         (let ((web-mode-enable-part-face nil))
@@ -37,20 +34,6 @@
       ;; enable flycheck
       (flycheck-select-checker 'jsxhint-checker)
       (flycheck-mode)))
-
-  ;; editing enhancements for web-mode
-  ;; https://github.com/jtkDvlp/web-mode-edit-element
-  (use-package web-mode-edit-element
-    ;; :config (add-hook 'web-mode-hook 'web-mode-edit-element-minor-mode)
-    )
-
-  ;; snippets for HTML
-  ;; https://github.com/smihica/emmet-mode
-  (use-package emmet-mode
-    :init (setq emmet-move-cursor-between-quotes t) ;; default nil
-    :delight (emmet-mode " e"))
-  (add-hook 'web-mode-hook 'emmet-mode)
-  (add-hook 'vue-mode-hook 'emmet-mode)
 
   (defun my-web-mode-hook ()
     "Hook for `web-mode' config for company-backends."
@@ -68,17 +51,24 @@
 	  (if (or (string= web-mode-cur-language "javascript")
 		  (string= web-mode-cur-language "jsx"))
 	      (unless tern-mode (tern-mode))
-	    (if tern-mode (tern-mode -1))))))
-  (add-hook 'web-mode-hook 'company-mode)
+	    (if tern-mode (tern-mode -1)))))))
 
-  ;; to get completion data for angularJS
-  (use-package ac-html-angular :defer t)
+;; snippets for HTML
+;; https://github.com/smihica/emmet-mode
+(use-package emmet-mode
+  :init (setq emmet-move-cursor-between-quotes t) ;; default nil
+  :hook ((web-mode . emmet-mode)
+	 (vue-mode . emmet-mode)))
 
-  ;; to get completion for HTML stuff
-  ;; https://github.com/osv/company-web
-  (use-package company-web)
 
-  (add-hook 'web-mode-hook 'company-mode))
+;; to get completion data for angularJS
+(use-package ac-html-angular
+  :defer t)
+
+;; to get completion for HTML stuff
+;; https://github.com/osv/company-web
+(use-package company-web
+  :after web-mode)
 
 ;; configure CSS mode company backends
 (use-package css-mode

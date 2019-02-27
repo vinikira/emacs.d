@@ -94,23 +94,6 @@
 
 (fset 'yes-or-no-p 'y-or-n-p)
 
-;; Font
-(defvar font-name "Iosevka")
-(defvar font-size 10)
-
-(defun vs/set-font (font-name size)
-  "Set frame font and SIZE if they is installed in system using FONT-NAME."
-  (when (member font-name (font-family-list))
-    (add-to-list 'default-frame-alist `(font . ,(format "%s-%d" font-name size)))
-    (set-face-attribute 'default nil :font (format "%s-%d" font-name size))
-    (set-frame-font (format "%s-%d" font-name size) nil t)))
-
-(if (daemonp)
-    (add-hook 'after-make-frame-functions (lambda (frame)
-                                            (select-frame frame)
-	                                    (vs/set-font font-name font-size)))
-    (vs/set-font font-name font-size))
-
 ;; Enable modes
 (mapc (lambda (it) (funcall it 1))
       '(global-auto-revert-mode
@@ -153,6 +136,13 @@
 	       (linum-mode 0)
 	       (buffer-disable-undo)
 	       (fundamental-mode))))
+
+(defun vs/font-lock ()
+  (font-lock-add-keywords
+   nil '(("\\<\\(FIXME\\|TODO\\|NOCOMMIT\\)"
+	  1 font-lock-warning-face t))))
+
+(add-hook 'prog-mode-hook 'vs/font-lock)
 
 ;; Start Emacs server
 (when (and (fboundp 'server-running-p)

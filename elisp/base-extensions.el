@@ -20,14 +20,12 @@
             (setq inhibit-compacting-font-caches t)))
 
 (use-package company
-  :delight
   :config
   (add-hook 'after-init-hook 'global-company-mode)
   (setq-default company-dabbrev-downcase 0)
   (setq company-idle-delay 0))
 
 (use-package company-lsp
-  :delight
   :commands company-lsp
   :config (setq company-lsp-async t
                 company-lsp-enable-snippet t))
@@ -57,7 +55,6 @@
   (setq ediff-diff-options "-w"))
 
 (use-package editorconfig
-  :delight
   :config
   (editorconfig-mode 1))
 
@@ -75,7 +72,6 @@
   ("C-c e p" . er/mark-inside-pairs))
 
 (use-package flycheck
-  :delight
   :init
   (setq flycheck-javascript-eslint-executable "eslint_d")
   (global-flycheck-mode 1))
@@ -86,11 +82,18 @@
   :config (global-git-gutter-mode))
 
 (use-package counsel
+  :after ivy
+  :config (counsel-mode 1)
   :bind
   ("M-x" . counsel-M-x)
-  ("C-x C-m" . counsel-M-x)
   ("C-x C-f" . counsel-find-file)
-  ("C-x c k" . counsel-yank-pop))
+  ("C-x c k" . counsel-yank-pop)
+  ("<f1> f" . counsel-describe-function)
+  ("<f1> v" . counsel-describe-variable)
+  ("<f1> l" . counsel-load-library)
+  ("<f2> i" . counsel-info-lookup-symbol)
+  ("<f2> u" . counsel-unicode-char)
+  ("C-x C-r" . counsel-recentf))
 
 (use-package counsel-projectile
   :bind
@@ -100,15 +103,18 @@
   (counsel-projectile-on))
 
 (use-package ivy
-  :delight
   :bind
   ("C-x s" . swiper)
   ("C-x C-r" . ivy-resume)
   ("C-x b" . ivy-switch-buffer)
   :config
-  (ivy-mode 1)
-  (setq ivy-use-virtual-buffers nil)
-  (define-key read-expression-map (kbd "C-r") 'counsel-expression-history))
+  (setq ivy-use-virtual-buffers t)
+  (define-key read-expression-map (kbd "C-r") 'counsel-expression-history)
+  (ivy-mode 1))
+
+(use-package ivy-rich
+  :after ivy
+  :config (ivy-rich-mode 1))
 
 (use-package lsp-mode
   :commands lsp
@@ -165,8 +171,8 @@
  			"~/")
 	org-default-notes-file (concat org-directory "/notes.org")
         org-agenda-files (list (concat org-directory "/work.org")
-                             (concat org-directory "/school.org")
-                             (concat org-directory "/home.org"))
+                               (concat org-directory "/school.org")
+                               (concat org-directory "/home.org"))
         org-confirm-babel-evaluate nil
         org-src-fontify-natively t
         org-log-done 'time
@@ -210,26 +216,31 @@
   :config
   (setq org-hide-leading-stars t))
 
-(use-package ox-reveal)
+(use-package ox-reveal
+  :init (setq org-reveal-root "https://cdn.jsdelivr.net/reveal.js/latest"
+              org-reveal-mathjax t))
 
 (use-package telephone-line
   :config
   (telephone-line-mode))
 
 (use-package projectile
-  :delight '(:eval (concat " [" (projectile-project-name) "]"))
   :bind (("C-c p s p" . projectile-switch-project)
-         ("C-c p c p" . projectile-kill-buffers)
-         ("C-c p v c" . projectile-vc))
-  :config
+         ("C-c p k p" . projectile-kill-buffers)
+         ("C-c p v c" . projectile-vc)
+	 ("C-c p a g" . projectile-ag)
+	 ("C-c p e g" . projectile-grep)
+	 ("C-c p f f" . projectile-find-file))
+  :init
   (setq projectile-known-projects-file
         (expand-file-name "projectile-bookmarks.eld" temp-dir)
         projectile-completion-system 'ivy
-        projectile-globally-ignored-directories '("node_modules"))
-  (projectile-global-mode))
+        projectile-globally-ignored-directories '("node_modules" ".git" ".svn"))
+  :config (projectile-mode))
 
 (use-package projectile-ripgrep
-  :bind (("C-c p s f" . projectile-ripgrep)))
+  :after projectile
+  :bind (("C-c p r g" . projectile-ripgrep)))
 
 (use-package neotree
   :init
@@ -269,18 +280,15 @@
 
 (use-package restclient-test
   :defer t
-  :if (fboundp 'restclient)
-  :after (restclient-mode))
+  :after restclient-mode)
 
 (use-package smartparens
-  :delight
   :config (smartparens-global-mode))
 
 ;; Commando history
 (use-package smex)
 
 (use-package undo-tree
-  :delight
   :config
   ;; Remember undo history
   (setq
@@ -289,7 +297,6 @@
   (global-undo-tree-mode 1))
 
 (use-package which-key
-  :delight
   :config
   (which-key-mode))
 
@@ -308,15 +315,13 @@
   :config (xclip-mode))
 
 (use-package yasnippet
-  :delight
   :init (setq yas-snippet-dirs
               '("~/.emacs.d/snippets/"))
   :config
   (yas-global-mode 1))
 
 (use-package yasnippet-snippets
-  :delight
   :after (yas-global-mode))
 
 (provide 'base-extensions)
-;;; base-extensions ends here
+;;; base-extensions.el ends here

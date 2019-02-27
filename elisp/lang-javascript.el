@@ -13,7 +13,7 @@
   :interpreter (("node" . js2-mode)
 		("node" . js2-jsx-mode))
   :bind (:map js2-mode-map
-              (("C-." . js2-jump-to-definition)
+              (("C-c ." . js2-jump-to-definition)
                ("C-c f b" . vs/format-standardjs-buffer)
                ("C-c f w s" . lsp-ui-peek-find-workspace-symbol)))
   :mode ("\\.js$" . js2-mode)

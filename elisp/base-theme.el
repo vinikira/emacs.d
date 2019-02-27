@@ -2,26 +2,30 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun vs/config-doom-theme ()
-  (load-theme 'doom-dracula t)
-  (doom-themes-visual-bell-config)
-  (doom-themes-neotree-config)
-  (doom-themes-org-config))
+(defvar vs/chosen-theme 'doom-molokai)
+(defvar vs/chosen-font-name "Iosevka")
+(defvar vs/chosen-font-size 14)
 
-(defun vs/load-frame-theme (frame)
-	  "FRAME."
-	  (select-frame frame)
-	  (vs/config-doom-theme))
+(defun vs/load-my-theme-config (&optional frame)
+  "Load config for current FRAME."
+  (when frame (select-frame frame))
+  (load-theme vs/chosen-theme t)
+  (when (member vs/chosen-font-name (font-family-list))
+    (add-to-list 'default-frame-alist `(font . ,(format "%s-%d" vs/chosen-font-name vs/chosen-font-size)))
+    (set-face-attribute 'default nil :font (format "%s-%d" vs/chosen-font-name vs/chosen-font-size))
+    (set-frame-font (format "%s-%d" vs/chosen-font-name vs/chosen-font-size) nil t)))
 
 (use-package doom-themes
   :ensure t
   :init (setq doom-themes-enable-bold t
               doom-themes-enable-italic t
               doom-neotree-file-icons t)
-  :config
-  (if (daemonp)
-      (add-hook 'after-make-frame-functions #'vs/load-frame-theme)
-    (vs/config-doom-theme)))
+  :config (doom-themes-visual-bell-config)
+  (doom-themes-neotree-config)
+  (doom-themes-org-config))
+
+(add-hook 'after-make-frame-functions #'vs/load-my-theme-config)
+(add-hook 'after-init-hook #'vs/load-my-theme-config)
 
 (provide 'base-theme)
-;;; base-theme ends here
+;;; base-theme.el ends here

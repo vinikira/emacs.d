@@ -26,4 +26,4 @@
   (setq company-tooltip-align-annotations t))
 
 (provide 'lang-rust)
-;;; lang-rust ends here.
+;;; lang-rust.el ends here
