@@ -32,12 +32,12 @@
        (if (region-active-p) end (point-max))
        "standard --stdin --fix"
        t
-       (current-buffer)))
-    (forward-line 1)
-    (ignore-errors
-    (when (and (search-forward "standard:") (not (beginning-of-line)))
-      (delete-region (point) (point-max))))
-    (goto-char temp-point)))
+       (current-buffer))
+      (goto-char (point-min))
+      (when (search-forward "standard:" nil t)
+        (beginning-of-line)
+        (delete-region (point) (point-max)))
+      (goto-char temp-point))))
 
 (defun vs/format-xml-buffer (&optional begin end)
   "Format xml buffer using xmllint, BEGIN region and END region."
