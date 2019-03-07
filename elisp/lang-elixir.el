@@ -1,11 +1,12 @@
 ;;; lang-elixir.el --- Elixir Lang
 ;;; Commentary:
 ;;; Code:
-(use-package elixir-mode)
+(use-package elixir-mode
+  :mode (("\\.ex$" . elixir-mode)
+	 ("\\.exs$" . elixir-mode)))
 
 (use-package alchemist
-  :config
-  (add-hook 'elixir-mode-hook 'alchemist-mode))
+  :hook (elixir-mode . alchemist-mode))
 
 (use-package flycheck-mix
   :commands (flycheck-mix-setup))
