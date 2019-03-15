@@ -29,5 +29,6 @@
 (require 'lang-rust)
 (require 'lang-config)
 (require 'lang-java)
+(require 'lang-dart)
 
 ;;; init.el ends here
