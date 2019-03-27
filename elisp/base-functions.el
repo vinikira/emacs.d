@@ -93,5 +93,10 @@
   (interactive "P")
   (vs/generic-scratch-buffer "*xml-scratch*" 'xml-mode open-new-frame))
 
+(defun vs/scratch-org (open-new-frame)
+  "Create a new xml scratch buffer."
+  (interactive "P")
+  (vs/generic-scratch-buffer "*org-scratch*" 'org-mode open-new-frame))
+
 (provide 'base-functions)
 ;;; base-functions ends here

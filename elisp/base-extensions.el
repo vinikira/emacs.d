@@ -8,8 +8,7 @@
     (global-set-key [remap other-window] 'ace-window)
     (custom-set-faces
      '(aw-leading-char-face
-       ((t (:inherit ace-jump-face-foreground :height 3.0)))))
-    ))
+       ((t (:inherit ace-jump-face-foreground :height 3.0)))))))
 
 (use-package avy
   :bind
@@ -24,11 +23,6 @@
   (add-hook 'after-init-hook 'global-company-mode)
   (setq-default company-dabbrev-downcase 0)
   (setq company-idle-delay 0))
-
-(use-package company-lsp
-  :commands company-lsp
-  :config (setq company-lsp-async t
-                company-lsp-enable-snippet t))
 
 (use-package company-quickhelp
   :if (fboundp 'company)
@@ -82,7 +76,6 @@
   :config (global-git-gutter-mode))
 
 (use-package counsel
-  :after ivy
   :config (counsel-mode 1)
   :bind
   ("M-x" . counsel-M-x)
@@ -98,9 +91,7 @@
 (use-package counsel-projectile
   :bind
   ("C-x v" . counsel-projectile)
-  ("C-x c p" . counsel-projectile-ag)
-  :config
-  (counsel-projectile-on))
+  ("C-x c p" . counsel-projectile-ag))
 
 (use-package ivy
   :bind
@@ -115,16 +106,6 @@
 (use-package ivy-rich
   :after ivy
   :config (ivy-rich-mode 1))
-
-(use-package lsp-mode
-  :commands lsp
-  :hook ((lsp-mode . lsp-ui-mode))
-  :config (push 'company-lsp company-backends))
-
-;; LSP UI
-;; https://github.com/emacs-lsp/lsp-ui
-(use-package lsp-ui
-  :commands lsp-ui-mode)
 
 (use-package magit
   :if (executable-find "git")
@@ -144,13 +125,12 @@
   :if (fboundp 'magit))
 
 (use-package markdown-mode
-  :mode ("\\.\\(m\\(ark\\)?down\\|md\\)$" . markdown-mode))
-
-(use-package markdownfmt
-  :config
-  (add-hook 'markdown-mode-hook #'markdownfmt-enable-on-save)
+  :mode ("\\.\\(m\\(ark\\)?down\\|md\\)$" . markdown-mode)
   :bind
   ("C-c C-f" . markdownfmt-format-buffer))
+
+(use-package markdownfmt
+  :hook (markdown-mode . markdownfmt-enable-on-save))
 
 (use-package multiple-cursors
   :bind
@@ -257,12 +237,6 @@
 
 (use-package try
   :defer t)
-
-(use-package twittering-mode
-  :defer t
-  :config
-  (setq twittering-icon-mode t
-	twittering-use-master-password t))
 
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))

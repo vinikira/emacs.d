@@ -145,6 +145,7 @@
 (add-hook 'prog-mode-hook 'vs/font-lock)
 
 ;; Start Emacs server
+(require 'server)
 (when (and (fboundp 'server-running-p)
          (not (server-running-p)))
    (server-start))

@@ -14,6 +14,7 @@
 (global-set-key (kbd "C-c s b e") 'vs/scratch-js)
 (global-set-key (kbd "C-c s b j") 'vs/scratch-json)
 (global-set-key (kbd "C-c s b x") 'vs/scratch-xml)
+(global-set-key (kbd "C-c s b o") 'vs/scratch-org)
 
 (global-set-key (kbd "M-<down>") 'enlarge-window)
 (global-set-key (kbd "M-<up>") 'shrink-window)

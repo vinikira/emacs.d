@@ -14,8 +14,7 @@
 		("node" . js2-jsx-mode))
   :bind (:map js2-mode-map
               (("C-c ." . js2-jump-to-definition)
-               ("C-c f b" . vs/format-standardjs-buffer)
-               ("C-c f w s" . lsp-ui-peek-find-workspace-symbol)))
+               ("C-c f b" . vs/format-standardjs-buffer)))
   :mode ("\\.js$" . js2-mode)
   :config
   (custom-set-variables '(js2-mode-show-parse-errors nil)
@@ -49,8 +48,8 @@
   :config
   (define-key js2-mode-map (kbd "M-.") nil)
   :hook ((js2-mode .
-            (lambda ()
-              (add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t)))))
+		   (lambda ()
+		     (add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t)))))
 
 (use-package json-mode
   :mode
@@ -71,12 +70,12 @@
   :hook ((js2-mode . indium-interaction-mode))
   :bind (:map indium-interaction-mode-map
               ("C-x C-e" . indium-eval-last-node)
-              ("C-c i q" . (lambda ()
+              ("C-c d q" . (lambda ()
                              (interactive)
                              (indium-quit)
                              (revert-buffer t t)))
-              ("C-c i c" . indium-connect)
-              ("C-c i l" . indium-launch))
+              ("C-c d c" . indium-connect)
+              ("C-c d l" . indium-launch))
   :config (delight indium-interaction-mode))
 
 ;; typescript mode
@@ -88,13 +87,16 @@
   (setq-default company-tooltip-align-annotations t)
   (tide-hl-identifier-mode +1))
 
+(use-package typescript-mode
+  :mode ("\\.ts$" . typescript-mode))
+
 (use-package tide
   :ensure t
-  :mode ("\\.ts\\'" . typescript-mode)
   :after (typescript-mode company flycheck)
   :bind (:map tide-mode-map
               ("C-c C-d" . tide-jsdoc-template)
-              ("C-c t f" . tide-organize-imports))
+              ("C-c t f" . tide-organize-imports)
+	      ("C-c f b" . vs/format-standardjs-buffer))
   :hook ((typescript-mode . setup-tide-mode)
          (typescript-mode . tide-hl-identifier-mode)))
 
