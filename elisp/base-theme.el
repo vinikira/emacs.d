@@ -2,9 +2,9 @@
 ;;; Commentary:
 ;;; Code:
 
-(defvar vs/chosen-theme 'doom-molokai)
-(defvar vs/chosen-font-name "Iosevka")
-(defvar vs/chosen-font-size 14)
+(defvar vs/chosen-theme 'doom-dracula)
+(defvar vs/chosen-font-name "Terminus (TTF)")
+(defvar vs/chosen-font-size 12)
 
 (defun vs/load-my-theme-config (&optional frame)
   "Load config for current FRAME."
@@ -19,7 +19,7 @@
   :ensure t
   :init (setq doom-themes-enable-bold t
               doom-themes-enable-italic t
-              doom-neotree-file-icons t)
+	      doom-neotree-file-icons t)
   :config (doom-themes-visual-bell-config)
   (doom-themes-neotree-config)
   (doom-themes-org-config))
