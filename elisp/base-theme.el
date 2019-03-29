@@ -18,10 +18,8 @@
 (use-package doom-themes
   :ensure t
   :init (setq doom-themes-enable-bold t
-              doom-themes-enable-italic t
-	      doom-neotree-file-icons t)
+              doom-themes-enable-italic t)
   :config (doom-themes-visual-bell-config)
-  (doom-themes-neotree-config)
   (doom-themes-org-config))
 
 (add-hook 'after-make-frame-functions #'vs/load-my-theme-config)

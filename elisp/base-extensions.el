@@ -220,20 +220,24 @@
 
 (use-package projectile-ripgrep
   :after projectile
-  :bind (("C-c p r g" . projectile-ripgrep)))
+  :bind (("C-c p r g" . projectile-ripgrep))
+  )
 
-(use-package neotree
-  :init
-  (setq neo-theme (if (display-graphic-p) 'icons 'nerd)
-	neo-show-hidden-files t
-	neo-smart-open t
-	neo-confirm-delete-directory-recursively t
-        neo-confirm-delete-file t
-	neo-auto-indent-point t)
+(use-package treemacs
   :bind
   (:map global-map
-        ([f8] . neotree-toggle)
-        ([f7] . neotree-find)))
+        ("M-0"       . treemacs-select-window)
+        ("C-x t 1"   . treemacs-delete-other-windows)
+        ([f8]   . treemacs)
+        ("C-x t B"   . treemacs-bookmark)
+        ([f7] . treemacs-find-file)
+        ("C-x t M-t" . treemacs-find-tag)))
+
+(use-package treemacs-projectile
+  :after treemacs projectile)
+
+(use-package treemacs-magit
+  :after treemacs magit)
 
 (use-package try
   :defer t)

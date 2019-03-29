@@ -5,3 +5,6 @@ smex-items
 .custom.el
 recentf
 url
+.cache
+.mc-lists.el
+transient
