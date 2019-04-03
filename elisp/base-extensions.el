@@ -205,18 +205,13 @@
   (telephone-line-mode))
 
 (use-package projectile
-  :bind (("C-c p s p" . projectile-switch-project)
-         ("C-c p k p" . projectile-kill-buffers)
-         ("C-c p v c" . projectile-vc)
-	 ("C-c p a g" . projectile-ag)
-	 ("C-c p e g" . projectile-grep)
-	 ("C-c p f f" . projectile-find-file))
   :init
   (setq projectile-known-projects-file
         (expand-file-name "projectile-bookmarks.eld" temp-dir)
         projectile-completion-system 'ivy
         projectile-globally-ignored-directories '("node_modules" ".git" ".svn"))
-  :config (projectile-mode))
+  :config (projectile-mode +1)
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
 
 (use-package projectile-ripgrep
   :after projectile
