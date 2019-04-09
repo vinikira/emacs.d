@@ -2,7 +2,8 @@
 ;;; Commentary:
 ;;; Code:
 (use-package dart-mode
-  :mode ("\\.dart$"))
+  :mode ("\\.dart$")
+  :init (setq dart-format-on-save t))
 
 (provide 'lang-dart)
 ;;; lang-dart.el ends here

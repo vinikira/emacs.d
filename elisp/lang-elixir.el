@@ -1,7 +1,13 @@
 ;;; lang-elixir.el --- Elixir Lang
 ;;; Commentary:
 ;;; Code:
+
+(defun format-elixir-buffer ()
+  "Format elixir buffer."
+  (add-hook 'before-save-hook 'elixir-format nil t))
+
 (use-package elixir-mode
+  :hook (elixir-mode . format-elixir-buffer)
   :mode (("\\.ex$" . elixir-mode)
 	 ("\\.exs$" . elixir-mode)))
 
