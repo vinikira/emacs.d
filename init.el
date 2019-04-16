@@ -28,5 +28,6 @@
 (require 'lang-config)
 (require 'lang-java)
 (require 'lang-dart)
+(require 'lang-kotlin)
 
 ;;; init.el ends here
