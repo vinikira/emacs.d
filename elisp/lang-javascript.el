@@ -70,12 +70,14 @@
   :hook ((js2-mode . indium-interaction-mode))
   :bind (:map indium-interaction-mode-map
               ("C-x C-e" . indium-eval-last-node)
-              ("C-c d q" . (lambda ()
-                             (interactive)
-                             (indium-quit)
-                             (revert-buffer t t)))
-              ("C-c d c" . indium-connect)
-              ("C-c d l" . indium-launch))
+              ([f6] . (lambda ()
+                        (interactive)
+                        (indium-quit)
+                        (kill-buffer "*node process*")
+                        (revert-buffer t t)
+                        (delete-other-windows)))
+              ([S-<f5>] . indium-connect)
+              ([f5] . indium-launch))
   :config (delight indium-interaction-mode))
 
 ;; typescript mode

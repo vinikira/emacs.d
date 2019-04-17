@@ -65,6 +65,9 @@
   ("C-c e r" . er/expand-region)
   ("C-c e p" . er/mark-inside-pairs))
 
+(use-package fancy-narrow
+  :config (fancy-narrow-mode))
+
 (use-package flycheck
   :init
   (setq flycheck-javascript-eslint-executable "eslint_d")

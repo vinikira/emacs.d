@@ -23,6 +23,9 @@
 (unless (package-installed-p 'use-package)
   (package-install 'use-package))
 
+(require 'use-package-ensure)
+(setq use-package-always-ensure t)
+
 (defconst private-dir  (expand-file-name "private" user-emacs-directory))
 (defconst temp-dir (format "%s/cache" private-dir)
   "Hostname-based elisp temp directories.")
@@ -85,9 +88,7 @@
       gc-cons-threshold                  20000000)
 
 
-(setq-default  use-package-always-ensure t
-
-	       ;; Bookmarks
+(setq-default  ;; Bookmarks
 	       ;; persistent bookmarks
 	       bookmark-save-flag        t
 	       bookmark-default-file     (concat temp-dir "/bookmarks"))

@@ -3,7 +3,7 @@
 ;;; Code:
 
 (defvar vs/chosen-theme 'doom-dracula)
-(defvar vs/chosen-font-name "Terminus (TTF)")
+(defvar vs/chosen-font-name "xos4 Terminus")
 (defvar vs/chosen-font-size 12)
 
 (defun vs/load-my-theme-config (&optional frame)

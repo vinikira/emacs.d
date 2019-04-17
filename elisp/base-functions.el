@@ -52,12 +52,12 @@
        (current-buffer))
       (goto-char curr-point))))
 
-(defun vs/generate-nodejs-project-config-files ()
+(defun vs/generate-indium-config-file ()
   "Generate indium generic config file for nodejs projects."
   (interactive)
   (when (string= major-mode "dired-mode")
     (shell-command
-     (format "echo '{\"configurations\": [{\"name\": \"%s\",\"type\": \"%s\",\"command\": \"%s\"}]' > .indium.json"
+     (format "echo '{\"configurations\": [{\"name\": \"%s\",\"type\": \"%s\",\"command\": \"%s\"}]}' > .indium.json"
              (read-string "Enter indium project name:")
              (read-string "Enter indium project type (node or chrome):")
              (read-string "Enter indium command:")))))
