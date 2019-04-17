@@ -141,6 +141,8 @@
 
 (use-package ob-restclient)
 
+(use-package ob-ipython)
+
 (use-package ob-async
   :config (setq ob-async-no-async-languages-alist '("ipython")))
 
@@ -177,7 +179,9 @@
 	     (js . t)
 	     (shell . t)
 	     (plantuml . t)
-	     (sql . t))))
+	     (sql . t)
+	     (ipython . t))))
+  (add-hook 'org-babel-after-execute-hook 'org-display-inline-images 'append)
   :hook (org-mode . (lambda () (display-line-numbers-mode -1)))
   :bind
   ("C-c l" . org-store-link)
