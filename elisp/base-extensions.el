@@ -39,8 +39,6 @@
                           (projects . 5)
                           (agenda . 5))))
 
-(use-package delight)
-
 (use-package ediff
   :defer t
   :config
@@ -130,7 +128,8 @@
 (use-package markdown-mode
   :mode ("\\.\\(m\\(ark\\)?down\\|md\\)$" . markdown-mode)
   :bind
-  ("C-c C-f" . markdownfmt-format-buffer))
+  (:map markdown-mode
+        ("C-c C-f" . markdownfmt-format-buffer)))
 
 (use-package markdownfmt
   :hook (markdown-mode . markdownfmt-enable-on-save))
@@ -151,13 +150,12 @@
 
 (use-package org
   :config
-  (setq org-directory (if (file-directory-p "~/Dropbox/org-files")
- 			  "~/Dropbox/org-files"
+  (setq org-directory (if (file-directory-p "~/Sync/org")
+ 			  "~/Sync/org"
  			"~/")
 	org-default-notes-file (concat org-directory "/notes.org")
         org-agenda-files (list (concat org-directory "/work.org")
-                               (concat org-directory "/school.org")
-                               (concat org-directory "/home.org"))
+                               (concat org-directory "/personal.org"))
         org-confirm-babel-evaluate nil
         org-src-fontify-natively t
         org-log-done 'time
@@ -222,8 +220,7 @@
 
 (use-package projectile-ripgrep
   :after projectile
-  :bind (("C-c p r g" . projectile-ripgrep))
-  )
+  :bind (("C-c p r g" . projectile-ripgrep)))
 
 (use-package treemacs
   :bind
@@ -253,13 +250,11 @@
   (recentf-mode 1))
 
 (use-package restclient
-  :defer t
   :mode
   ("\\.http$" . restclient-mode)
   ("\\.https$" . restclient-mode))
 
 (use-package restclient-test
-  :defer t
   :after restclient-mode)
 
 (use-package smartparens

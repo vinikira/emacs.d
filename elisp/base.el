@@ -26,6 +26,9 @@
 (require 'use-package-ensure)
 (setq use-package-always-ensure t)
 
+(unless (package-installed-p 'delight)
+  (package-install 'delight))
+
 (defconst private-dir  (expand-file-name "private" user-emacs-directory))
 (defconst temp-dir (format "%s/cache" private-dir)
   "Hostname-based elisp temp directories.")

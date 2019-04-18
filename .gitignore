@@ -8,3 +8,6 @@ url
 .cache
 .mc-lists.el
 transient
+eshell
+.org-id-locations
+session*
