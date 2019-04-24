@@ -126,13 +126,15 @@
   :if (fboundp 'magit))
 
 (use-package markdown-mode
-  :mode ("\\.\\(m\\(ark\\)?down\\|md\\)$" . markdown-mode)
-  :bind
-  (:map markdown-mode
-        ("C-c C-f" . markdownfmt-format-buffer)))
+  :mode (("README\\.md\\'" . gfm-mode)
+         ("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode))
+  :init (setq markdown-command "multimarkdown"))
 
 (use-package markdownfmt
-  :hook (markdown-mode . markdownfmt-enable-on-save))
+  :hook (markdown-mode . markdownfmt-enable-on-save)
+  :bind (:map markdown-mode
+	("C-c C-f" . markdownfmt-format-buffer)))
 
 (use-package multiple-cursors
   :bind
