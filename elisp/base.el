@@ -2,20 +2,9 @@
 ;;; Commentary:
 ;;; Code:
 
-;; Speed up a little emacs loadtime when reduce the number of GC executions
-;; during init evaluation and then reset to default value
-(setq gc-cons-threshold (* 64 1024 1024)
-      gc-cons-percentage 0.8)
-
-(add-hook 'after-init-hook '(lambda ()
-                              (setq gc-cons-threshold (car (get 'gc-cons-threshold 'standard-value))
-                                    gc-cons-percentage (car (get 'gc-cons-percentage 'standard-value)))))
-
-(package-initialize)
 (setq package-archives (append package-archives
 			       '(("melpa" . "https://melpa.org/packages/")
-			       ("elpy" . "http://jorgenschaefer.github.io/packages/")
-			       ("org" . "http://orgmode.org/elpa/"))))
+				 ("elpy" . "http://jorgenschaefer.github.io/packages/"))))
 
 (when (not package-archive-contents)
   (package-refresh-contents))
@@ -78,36 +67,35 @@
       auto-save-file-name-transforms    `((".*" ,(concat temp-dir "/backup/") t))
 
       ;; smooth scroling
-      redisplay-dont-pause               t
       scroll-margin                      1
       scroll-step                        1
       scroll-conservatively              10000
       scroll-preserve-screen-position    nil
 
       ;; disable line wrap
-      truncate-lines                     t
-
-      ;; more memory
-      gc-cons-threshold                  20000000)
+      truncate-lines                     t)
 
 
 (setq-default  ;; Bookmarks
-	       ;; persistent bookmarks
-	       bookmark-save-flag        t
-	       bookmark-default-file     (concat temp-dir "/bookmarks"))
+ ;; persistent bookmarks
+ bookmark-save-flag        t
+ bookmark-default-file     (concat temp-dir "/bookmarks"))
 
 (fset 'yes-or-no-p 'y-or-n-p)
 
 ;; Enable modes
 (mapc (lambda (it) (funcall it 1))
-      '(global-auto-revert-mode
-	  show-paren-mode))
+      '(show-paren-mode
+	delete-selection-mode
+	blink-cursor-mode))
 
 ;; Disable modes
 (mapc (lambda (it) (funcall it -1))
       '(menu-bar-mode
 	tool-bar-mode
-	scroll-bar-mode))
+	scroll-bar-mode
+	global-auto-revert-mode
+	electric-indent-mode))
 
 ;; Delight modes
 (mapc (lambda (it) (funcall 'delight it))
@@ -117,42 +105,36 @@
 
 ;; Hooks
 
-;; linum only prog and text mode
 (defun vs/line-numbers ()
   "Display line numbers."
-  (if (fboundp 'global-display-line-numbers-mode)
-  (funcall (lambda ()
-    (display-line-numbers-mode 1)
-    (hl-line-mode 1)))
-  (linum-mode 1)))
+  (display-line-numbers-mode 1)
+  (hl-line-mode 1))
 
-(add-hook 'prog-mode-hook 'vs/line-numbers)
-(add-hook 'text-mode-hook 'vs/line-numbers)
-
-;; Delete trailing whitespace before save
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
-
-;; Optimize large files
-(add-hook 'find-file-hook
-	  '(lambda ()
-	     (when (> (buffer-size) (* 1024 1024))
-	       (setq buffer-read-only t)
-	       (linum-mode 0)
-	       (buffer-disable-undo)
-	       (fundamental-mode))))
+(defun vs/optimize-large-buffers ()
+  "Optimization mode for lage buffers."
+  (when (> (buffer-size) (* 1024 1024))
+    (setq buffer-read-only t)
+    (line-number-mode 0)
+    (buffer-disable-undo)
+    (fundamental-mode)))
 
 (defun vs/font-lock ()
+  "Font lock keywords."
   (font-lock-add-keywords
    nil '(("\\<\\(FIXME\\|TODO\\|NOCOMMIT\\)"
 	  1 font-lock-warning-face t))))
 
+(add-hook 'prog-mode-hook 'vs/line-numbers)
+(add-hook 'text-mode-hook 'vs/line-numbers)
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+(add-hook 'find-file-hook 'vs/optimize-large-buffers)
 (add-hook 'prog-mode-hook 'vs/font-lock)
 
 ;; Start Emacs server
 (require 'server)
 (when (and (fboundp 'server-running-p)
-         (not (server-running-p)))
-   (server-start))
+	   (not (server-running-p)))
+  (server-start))
 
 (provide 'base)
 ;;; base ends here

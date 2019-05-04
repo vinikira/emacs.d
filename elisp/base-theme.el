@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defvar vs/chosen-theme 'doom-dracula)
+(defvar vs/chosen-theme 'dracula)
 (defvar vs/chosen-font-name "xos4 Terminus")
 (defvar vs/chosen-font-size 12)
 (defvar vs/theme-loaded nil)
@@ -17,12 +17,7 @@
     (set-frame-font (format "%s-%d" vs/chosen-font-name vs/chosen-font-size) nil t))
   (setq vs/theme-loaded t))
 
-(use-package doom-themes
-  :ensure
-  :init (setq doom-themes-enable-bold t
-              doom-themes-enable-italic t)
-  :config (doom-themes-visual-bell-config)
-  (doom-themes-org-config))
+(use-package dracula-theme)
 
 (add-hook 'after-make-frame-functions #'vs/load-my-theme-config)
 (add-hook 'after-init-hook #'vs/load-my-theme-config)

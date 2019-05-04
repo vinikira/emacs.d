@@ -60,11 +60,6 @@
   :hook ((web-mode . emmet-mode)
 	 (vue-mode . emmet-mode)))
 
-
-;; to get completion data for angularJS
-(use-package ac-html-angular
-  :defer t)
-
 ;; to get completion for HTML stuff
 ;; https://github.com/osv/company-web
 (use-package company-web

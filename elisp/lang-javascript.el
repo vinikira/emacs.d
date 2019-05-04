@@ -93,7 +93,6 @@
   :mode ("\\.ts$" . typescript-mode))
 
 (use-package tide
-  :ensure t
   :after (typescript-mode company flycheck)
   :bind (:map tide-mode-map
               ("C-c C-d" . tide-jsdoc-template)

@@ -68,7 +68,7 @@
   "Open generic scratch buffer"
   (when open-new-frame
     (select-frame
-     (new-frame)))
+     (make-frame)))
   (switch-to-buffer
    (get-buffer-create new-buffer-name))
   (funcall mode))

@@ -14,37 +14,34 @@
   :bind
   ("C-c SPC" . avy-goto-char))
 
-(use-package all-the-icons
-  :config (when (memq window-system '(ns))
-            (setq inhibit-compacting-font-caches t)))
-
 (use-package company
+  :init
+  (setq company-dabbrev-downcase 0
+	company-idle-delay 0)
   :config
-  (add-hook 'after-init-hook 'global-company-mode)
-  (setq-default company-dabbrev-downcase 0)
-  (setq company-idle-delay 0))
+  (global-company-mode 1))
 
 (use-package company-quickhelp
-  :if (fboundp 'company)
+  :after company
   :config
-  (add-hook 'after-init-hook 'company-quickhelp-mode))
+  (company-quickhelp-mode 1))
 
 (use-package company-restclient
   :config (add-to-list 'company-backends 'company-restclient))
 
 (use-package dashboard
-  :config
-  (dashboard-setup-startup-hook)
+  :init
   (setq dashboard-items '((recents  . 5)
-                          (projects . 5)
-                          (agenda . 5))))
+			  (projects . 5)
+			  (agenda . 5)))
+  :config
+  (dashboard-setup-startup-hook))
 
 (use-package ediff
-  :defer t
-  :config
-  (setq ediff-window-setup-function 'ediff-setup-windows-plain)
-  (setq-default ediff-highlight-all-diffs 'nil)
-  (setq ediff-diff-options "-w"))
+  :init
+  (setq ediff-window-setup-function 'ediff-setup-windows-plain
+	ediff-highlight-all-diffs 'nil
+	ediff-diff-options "-w"))
 
 (use-package editorconfig
   :config
@@ -67,13 +64,10 @@
   :config (fancy-narrow-mode))
 
 (use-package flycheck
-  :init
-  (setq flycheck-javascript-eslint-executable "eslint_d")
+  :config
   (global-flycheck-mode 1))
 
 (use-package git-gutter-fringe
-  :ensure t
-  :diminish git-gutter-mode
   :config (global-git-gutter-mode))
 
 (use-package counsel
@@ -95,12 +89,9 @@
   ("C-x c p" . counsel-projectile-ag))
 
 (use-package ivy
-  :bind
-  ("C-x s" . swiper)
-  ("C-x C-r" . ivy-resume)
-  ("C-x b" . ivy-switch-buffer)
+  :bind ("C-x s" . swiper)
+  :init (setq ivy-use-virtual-buffers t)
   :config
-  (setq ivy-use-virtual-buffers t)
   (define-key read-expression-map (kbd "C-r") 'counsel-expression-history)
   (ivy-mode 1))
 
@@ -110,7 +101,7 @@
 
 (use-package magit
   :if (executable-find "git")
-  :config
+  :init
   (setq magit-completing-read-function 'ivy-completing-read)
   :bind
   ;; Magic
@@ -123,7 +114,7 @@
   ("C-x g r" . magit-rebase-interactive))
 
 (use-package magit-popup
-  :if (fboundp 'magit))
+  :after magit)
 
 (use-package markdown-mode
   :mode (("README\\.md\\'" . gfm-mode)
@@ -132,15 +123,16 @@
   :init (setq markdown-command "multimarkdown"))
 
 (use-package markdownfmt
+  :after markdown-mode
   :hook (markdown-mode . markdownfmt-enable-on-save)
   :bind (:map markdown-mode
-	("C-c C-f" . markdownfmt-format-buffer)))
+	      ("C-c C-f" . markdownfmt-format-buffer)))
 
 (use-package multiple-cursors
   :bind
   ("C-S-c C-S-c" . mc/edit-lines)
-  ("M-n" . mc/mark-next-like-this)
-  ("M-p" . mc/mark-previous-like-this)
+  ("M-S-n" . mc/mark-next-like-this)
+  ("M-S-p" . mc/mark-previous-like-this)
   ("C-c x" . mc/mark-all-like-this))
 
 (use-package ob-restclient)
@@ -148,10 +140,11 @@
 (use-package ob-ipython)
 
 (use-package ob-async
-  :config (setq ob-async-no-async-languages-alist '("ipython")))
+  :init (setq ob-async-no-async-languages-alist '("ipython")))
 
 (use-package org
-  :config
+  :ensure nil
+  :init
   (setq org-directory (if (file-directory-p "~/Sync/org")
  			  "~/Sync/org"
  			"~/")
@@ -173,6 +166,7 @@
            "* %? :IDEA: \n%t" :clock-in t :clock-resume t)
           ("n" "Next Task" entry (file+headline org-default-notes-file "Tasks")
            "** NEXT %? \nDEADLINE: %t")))
+  :config
   (org-babel-do-load-languages
    'org-babel-load-languages
    (append org-babel-load-languages
@@ -200,7 +194,7 @@
 
 (use-package org-bullets
   :hook ((org-mode . org-bullets-mode))
-  :config
+  :init
   (setq org-hide-leading-stars t))
 
 (use-package ox-reveal
@@ -217,12 +211,11 @@
         (expand-file-name "projectile-bookmarks.eld" temp-dir)
         projectile-completion-system 'ivy
         projectile-globally-ignored-directories '("node_modules" ".git" ".svn"))
-  :config (projectile-mode +1)
-  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
+  :bind-keymap ("C-c p" . projectile-command-map)
+  :config (projectile-mode +1))
 
 (use-package projectile-ripgrep
-  :after projectile
-  :bind (("C-c p r g" . projectile-ripgrep)))
+  :after projectile)
 
 (use-package treemacs
   :bind
@@ -240,15 +233,15 @@
 (use-package treemacs-magit
   :after treemacs magit)
 
-(use-package try
-  :defer t)
+(use-package try)
 
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
 
 (use-package recentf
-  :config
+  :init
   (setq recentf-save-file (recentf-expand-file-name "~/.emacs.d/private/cache/recentf"))
+  :config
   (recentf-mode 1))
 
 (use-package restclient
@@ -266,11 +259,12 @@
 (use-package smex)
 
 (use-package undo-tree
-  :config
+  :init
   ;; Remember undo history
   (setq
    undo-tree-auto-save-history nil
    undo-tree-history-directory-alist `(("." . ,(concat temp-dir "/undo/"))))
+  :config
   (global-undo-tree-mode 1))
 
 (use-package which-key
