@@ -47,6 +47,8 @@
   :config
   (editorconfig-mode 1))
 
+(use-package eglot)
+
 (use-package exec-path-from-shell
   :config
   ;; Add GOPATH to shell
