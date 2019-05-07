@@ -197,9 +197,8 @@
   :init
   (setq org-hide-leading-stars t))
 
-(use-package ox-reveal
-  :init (setq org-reveal-root "https://cdn.jsdelivr.net/reveal.js/latest"
-              org-reveal-mathjax t))
+(use-package org-re-reveal
+  :init (setq org-re-reveal-root "https://cdn.jsdelivr.net/reveal.js/latest"))
 
 (use-package telephone-line
   :config
