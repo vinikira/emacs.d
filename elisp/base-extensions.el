@@ -18,6 +18,7 @@
   :init
   (setq company-dabbrev-downcase 0
 	company-idle-delay 0)
+  :bind (("C-." . company-complete))
   :config
   (global-company-mode 1))
 
