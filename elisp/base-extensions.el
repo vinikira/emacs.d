@@ -134,8 +134,8 @@
 (use-package multiple-cursors
   :bind
   ("C-S-c C-S-c" . mc/edit-lines)
-  ("M-S-n" . mc/mark-next-like-this)
-  ("M-S-p" . mc/mark-previous-like-this)
+  ("M-n" . mc/mark-next-like-this)
+  ("M-p" . mc/mark-previous-like-this)
   ("C-c x" . mc/mark-all-like-this))
 
 (use-package ob-restclient)
