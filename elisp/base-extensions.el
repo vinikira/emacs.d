@@ -214,6 +214,7 @@
         projectile-completion-system 'ivy
         projectile-globally-ignored-directories '("node_modules" ".git" ".svn"))
   :bind-keymap ("C-c p" . projectile-command-map)
+  :bind (("C-," . projectile-find-file))
   :config (projectile-mode +1))
 
 (use-package projectile-ripgrep
