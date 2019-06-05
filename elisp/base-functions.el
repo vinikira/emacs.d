@@ -63,45 +63,36 @@
              (read-string "Enter indium command:")))))
 
 ;; Scratch Buffers stuff
-
-(defun vs/generic-scratch-buffer (new-buffer-name mode &optional open-new-frame)
+(defun vs/scratch-buffer (open-new-frame)
   "Open generic scratch buffer"
-  (when open-new-frame
-    (select-frame
-     (make-frame)))
-  (switch-to-buffer
-   (get-buffer-create new-buffer-name))
-  (funcall mode))
-
-(defun vs/scratch-restclient (open-new-frame)
-  "Create a new restclient scratch buffer."
   (interactive "P")
-  (vs/generic-scratch-buffer "*restclient-scratch*" 'restclient-mode open-new-frame))
+  (let ((selected-mode (completing-read
+                        "Scratch buffer with mode: "
+                        '("restclient-mode"
+                          "js2-mode"
+                          "json-mode"
+                          "xml-mode"
+                          "org-mode"
+                          "sql-mode"
+                          "lisp-interaction-mode"))))
+    (when open-new-frame
+      (select-frame
+       (make-frame)))
+    (switch-to-buffer
+     (get-buffer-create (concat "*" selected-mode "*")))
+    (funcall (intern selected-mode))))
 
-(defun vs/scratch-js (open-new-frame)
-  "Create a new javascript scratch buffer."
-  (interactive "P")
-  (vs/generic-scratch-buffer "*js-scratch*" 'js2-mode open-new-frame))
+;; Edit files with sudo
+(defun sudo-edit (&optional arg)
+  (interactive "p")
+  (if (or arg (not buffer-file-name))
+      (find-file (concat "/sudo:root@localhost:" (ido-read-file-name "File: ")))
+    (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))
 
-(defun vs/scratch-json (open-new-frame)
-  "Create a new json scratch buffer."
-  (interactive "P")
-  (vs/generic-scratch-buffer "*json-scratch*" 'json-mode open-new-frame))
-
-(defun vs/scratch-xml (open-new-frame)
-  "Create a new xml scratch buffer."
-  (interactive "P")
-  (vs/generic-scratch-buffer "*xml-scratch*" 'xml-mode open-new-frame))
-
-(defun vs/scratch-org (open-new-frame)
-  "Create a new xml scratch buffer."
-  (interactive "P")
-  (vs/generic-scratch-buffer "*org-scratch*" 'org-mode open-new-frame))
-
-(defun vs/scratch-sql (open-new-frame)
-  "Create a new xml scratch buffer."
-  (interactive "P")
-  (vs/generic-scratch-buffer "*sql-scratch*" 'sql-mode open-new-frame))
+;; Indent buffer
+(defun vs/indent-buffer ()
+  (interactive)
+  (indent-region (point-min) (point-max)))
 
 (provide 'base-functions)
 ;;; base-functions ends here

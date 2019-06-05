@@ -103,8 +103,10 @@
 	page-break-lines-mode
 	eldoc-mode))
 
-;; Hooks
+;; Windmove
+(windmove-default-keybindings)
 
+;; Hooks
 (defun vs/line-numbers ()
   "Display line numbers."
   (display-line-numbers-mode 1)

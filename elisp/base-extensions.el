@@ -11,8 +11,7 @@
        ((t (:inherit ace-jump-face-foreground :height 3.0)))))))
 
 (use-package avy
-  :bind
-  ("C-c SPC" . avy-goto-char))
+  :bind ("M-:" . 'avy-goto-char))
 
 (use-package company
   :init
@@ -29,6 +28,24 @@
 
 (use-package company-restclient
   :config (add-to-list 'company-backends 'company-restclient))
+
+(use-package counsel
+  :config (counsel-mode 1)
+  :bind
+  ("M-x" . counsel-M-x)
+  ("C-x C-f" . counsel-find-file)
+  ("C-x c k" . counsel-yank-pop)
+  ("<f1> f" . counsel-describe-function)
+  ("<f1> v" . counsel-describe-variable)
+  ("<f1> l" . counsel-load-library)
+  ("<f2> i" . counsel-info-lookup-symbol)
+  ("<f2> u" . counsel-unicode-char)
+  ("C-x C-r" . counsel-recentf))
+
+(use-package counsel-projectile
+  :bind
+  ("C-x v" . counsel-projectile)
+  ("C-x c p" . counsel-projectile-ag))
 
 (use-package dashboard
   :init
@@ -60,8 +77,7 @@
 
 (use-package expand-region
   :bind
-  ("C-c e r" . er/expand-region)
-  ("C-c e p" . er/mark-inside-pairs))
+  ("C-=" . er/expand-region))
 
 (use-package fancy-narrow
   :config (fancy-narrow-mode))
@@ -73,29 +89,10 @@
 (use-package git-gutter-fringe
   :config (global-git-gutter-mode))
 
-(use-package counsel
-  :config (counsel-mode 1)
-  :bind
-  ("M-x" . counsel-M-x)
-  ("C-x C-f" . counsel-find-file)
-  ("C-x c k" . counsel-yank-pop)
-  ("<f1> f" . counsel-describe-function)
-  ("<f1> v" . counsel-describe-variable)
-  ("<f1> l" . counsel-load-library)
-  ("<f2> i" . counsel-info-lookup-symbol)
-  ("<f2> u" . counsel-unicode-char)
-  ("C-x C-r" . counsel-recentf))
-
-(use-package counsel-projectile
-  :bind
-  ("C-x v" . counsel-projectile)
-  ("C-x c p" . counsel-projectile-ag))
-
 (use-package ivy
-  :bind ("C-x s" . swiper)
+  :bind ("C-s" . swiper)
   :init (setq ivy-use-virtual-buffers t)
   :config
-  (define-key read-expression-map (kbd "C-r") 'counsel-expression-history)
   (ivy-mode 1))
 
 (use-package ivy-rich
@@ -273,13 +270,6 @@
 (use-package which-key
   :config
   (which-key-mode))
-
-(use-package windmove
-  :bind
-  ("C-x <up>" . windmove-up)
-  ("C-x <down>" . windmove-down)
-  ("C-x <left>" . windmove-left)
-  ("C-x <right>" . windmove-right))
 
 (use-package wgrep
   :if (executable-find "grep"))

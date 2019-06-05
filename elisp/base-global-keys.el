@@ -9,22 +9,22 @@
 
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
-;; Scratch buffers stuff
-(global-set-key (kbd "C-c s b r") 'vs/scratch-restclient)
-(global-set-key (kbd "C-c s b e") 'vs/scratch-js)
-(global-set-key (kbd "C-c s b j") 'vs/scratch-json)
-(global-set-key (kbd "C-c s b x") 'vs/scratch-xml)
-(global-set-key (kbd "C-c s b o") 'vs/scratch-org)
-(global-set-key (kbd "C-c s b s") 'vs/scratch-sql)
+;; Scratch buffer
+(global-set-key (kbd "C-c s b") 'vs/scratch-buffer)
 
 (global-set-key (kbd "M-<down>") 'enlarge-window)
 (global-set-key (kbd "M-<up>") 'shrink-window)
 (global-set-key (kbd "M-<left>") 'enlarge-window-horizontally)
 (global-set-key (kbd "M-<right>") 'shrink-window-horizontally)
 
-(global-set-key (kbd "C-c i")
-                (lambda () (interactive)
-		  (indent-region (point-min) (point-max))))
+;; Indent all bufer
+(global-set-key (kbd "C-c i") 'vs/indent-buffer)
+
+;; Call shell
+(global-set-key (kbd "C-x C-z") 'shell)
+
+;; Remap search
+(global-set-key (kbd "C-x s") 'isearch-forward)
 
 (provide 'base-global-keys)
 ;;; base-global-keys ends here
