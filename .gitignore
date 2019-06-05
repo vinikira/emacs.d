@@ -11,3 +11,5 @@ transient
 eshell
 .org-id-locations
 session*
+/ido.last
+/projectile.cache

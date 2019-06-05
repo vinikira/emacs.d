@@ -11,7 +11,7 @@
        ((t (:inherit ace-jump-face-foreground :height 3.0)))))))
 
 (use-package avy
-  :bind ("M-:" . 'avy-goto-char))
+  :bind ("C-:" . 'avy-goto-char))
 
 (use-package company
   :init
