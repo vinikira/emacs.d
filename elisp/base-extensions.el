@@ -217,7 +217,7 @@
   :after projectile)
 
 (use-package quickrun
-  :bind (([f5] . quickrun))
+  :bind (([f5] . quickrun)))
 
 (use-package treemacs
   :bind
