@@ -11,7 +11,7 @@
        ((t (:inherit ace-jump-face-foreground :height 3.0)))))))
 
 (use-package avy
-  :bind ("C-:" . 'avy-goto-char))
+  :bind (("C-:" . 'avy-goto-char)))
 
 (use-package company
   :init
@@ -31,16 +31,15 @@
 
 (use-package counsel
   :config (counsel-mode 1)
-  :bind
-  ("M-x" . counsel-M-x)
-  ("C-x C-f" . counsel-find-file)
-  ("C-x c k" . counsel-yank-pop)
-  ("<f1> f" . counsel-describe-function)
-  ("<f1> v" . counsel-describe-variable)
-  ("<f1> l" . counsel-load-library)
-  ("<f2> i" . counsel-info-lookup-symbol)
-  ("<f2> u" . counsel-unicode-char)
-  ("C-x C-r" . counsel-recentf))
+  :bind (("M-x" . counsel-M-x)
+	 ("C-x C-f" . counsel-find-file)
+	 ("C-x c k" . counsel-yank-pop)
+	 ("<f1> f" . counsel-describe-function)
+	 ("<f1> v" . counsel-describe-variable)
+	 ("<f1> l" . counsel-load-library)
+	 ("<f2> i" . counsel-info-lookup-symbol)
+	 ("<f2> u" . counsel-unicode-char)
+	 ("C-x C-r" . counsel-recentf)))
 
 (use-package counsel-projectile
   :bind
@@ -216,6 +215,9 @@
 
 (use-package projectile-ripgrep
   :after projectile)
+
+(use-package quickrun
+  :bind (([f5] . quickrun))
 
 (use-package treemacs
   :bind

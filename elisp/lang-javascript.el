@@ -81,8 +81,8 @@
                         (kill-buffer "*node process*")
                         (revert-buffer t t)
                         (delete-other-windows)))
-              ([S-<f5>] . indium-connect)
-              ([f5] . indium-launch))
+              ([S-<f6>] . indium-connect)
+              ([C-<f6>] . indium-launch))
   :config (delight indium-interaction-mode))
 
 ;; typescript mode
