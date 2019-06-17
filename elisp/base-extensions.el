@@ -54,6 +54,9 @@
   :config
   (dashboard-setup-startup-hook))
 
+(use-package dumb-jump
+  :config (dumb-jump-mode))
+
 (use-package ediff
   :init
   (setq ediff-window-setup-function 'ediff-setup-windows-plain
