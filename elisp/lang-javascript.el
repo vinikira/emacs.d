@@ -68,19 +68,14 @@
   :mode
   ("\\.vue$" . vue-mode))
 
-;; indium: javascript awesome development environment
+;; Indium: javascript awesome development environment
 ;; https://github.com/NicolasPetton/indium
 (use-package indium
   :after js2-mode
   :hook ((js2-mode . indium-interaction-mode))
   :bind (:map indium-interaction-mode-map
               ("C-x C-e" . indium-eval-last-node)
-              ("C-<f6>" . (lambda ()
-                        (interactive)
-                        (indium-quit)
-                        (kill-buffer "*node process*")
-                        (revert-buffer t t)
-                        (delete-other-windows)))
+              ("C-<f6>" . vs/stop-indium-debug)
               ("S-<f6>" . indium-connect)
               ("<f6>" . indium-launch))
   :config (delight indium-interaction-mode))
