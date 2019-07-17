@@ -82,17 +82,28 @@
      (get-buffer-create (concat "*" selected-mode "*")))
     (funcall (intern selected-mode))))
 
-;; Edit files with sudo
+;; Edit files with root
 (defun sudo-edit (&optional arg)
   (interactive "p")
   (if (or arg (not buffer-file-name))
-      (find-file (concat "/sudo:root@localhost:" (ido-read-file-name "File: ")))
+      (find-file (concat "/sudo:root@localhost:" (read-file-name "File: ")))
     (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))
 
 ;; Indent buffer
 (defun vs/indent-buffer ()
   (interactive)
   (indent-region (point-min) (point-max)))
+
+;; Stop Indium debugger
+(defun vs/stop-indium-debug ()
+  (interactive)
+  (when (and (get-buffer "*node process*")
+             (get-buffer-process "*node process*"))
+    (indium-quit)
+    (interrupt-process (get-buffer-process "*node process*"))
+    (kill-buffer "*node process*")
+    (revert-buffer t t)
+    (delete-other-windows)))
 
 (provide 'base-functions)
 ;;; base-functions ends here
